@@ -20,7 +20,7 @@
         </tr>
         <tr>
           <td>Tempat Tanggal Lahir</td>
-          <td><input class="form-control" type="date" name="input_nama" value="<?php echo set_value('input_nama'); ?>"></td>
+          <td><input class="form-control" type="date" name="input_tgl_lahir" value="<?php echo set_value('input_nama'); ?>"></td>
         </tr>
         <tr>
           <td>Jenis Kelamin</td>
@@ -35,19 +35,19 @@
         </tr>
         <tr>
           <td>Nama Ayah</td>
-          <td><input class="form-control" type="text" name="input_nama" value="<?php echo set_value('input_ayah'); ?>"></td>
+          <td><input class="form-control" type="text" name="input_ayah" value="<?php echo set_value('input_ayah'); ?>"></td>
         </tr>
         <tr>
           <td>Nama Ibu</td>
-          <td><input class="form-control" type="text" name="input_nama" value="<?php echo set_value('input_ibu'); ?>"></td>
+          <td><input class="form-control" type="text" name="input_ibu" value="<?php echo set_value('input_ibu'); ?>"></td>
         </tr>
         <tr>
           <td>Pekerjaan Ayah</td>
-          <td><input class="form-control" type="text" name="input_nama" value="<?php echo set_value('input_pekerjaan_ayah'); ?>"></td>
+          <td><input class="form-control" type="text" name="input_pekerjaan_ayah" value="<?php echo set_value('input_pekerjaan_ayah'); ?>"></td>
         </tr>
         <tr>
           <td>Pekerjaan Ibu</td>
-          <td><input class="form-control" type="text" name="input_nama" value="<?php echo set_value('input_pekerjaan_ibu'); ?>"></td>
+          <td><input class="form-control" type="text" name="input_pekerjaan_ibu" value="<?php echo set_value('input_pekerjaan_ibu'); ?>"></td>
         </tr>
         <tr>
           <td>Telepon</td>

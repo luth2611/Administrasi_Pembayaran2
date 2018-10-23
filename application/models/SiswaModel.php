@@ -58,11 +58,16 @@ class SiswaModel extends CI_Model {
   // Fungsi untuk melakukan ubah data siswa berdasarkan NIS siswa
   public function edit($nis){
     $data = array(
-      "nama" => $this->input->post('input_nama'),
-      "jenis_kelamin" => $this->input->post('input_jeniskelamin'),
+      "nama_lengkap" => $this->input->post('input_nama'),
+      "tmpt_lahir" => $this->input->post('input_tgl_lahir'),
+      "jenis_kel" => $this->input->post('input_jeniskelamin'),
       "kelas" => $this->input->post('input_kelas'),
       "alamat" => $this->input->post('input_alamat'),
-      "telp" => $this->input->post('input_telp'),
+      "nama_ayah" => $this->input->post('input_ayah'),
+      "nama_ibu" => $this->input->post('input_ibu'),
+      "pekerjaan_ayah" => $this->input->post('input_pekerjaan_ayah'),
+      "pekerjaan_ibu" => $this->input->post('input_pekerjaan_ibu'),
+      "no_telp" => $this->input->post('input_telp'),
       "tahun_ajaran" => $this->input->post('input_thn')
     );
     
@@ -74,5 +79,15 @@ class SiswaModel extends CI_Model {
   public function delete($nis){
     $this->db->where('nis', $nis);
     $this->db->delete('siswa'); // Untuk mengeksekusi perintah delete data
+  }
+
+  public function getSiswa($select,$table,$where = null){
+      $this->db->select($select);
+      $this->db->from($table);
+      if($where != null){
+        $this->db->where($where);
+      }
+      return $this->db->get();
+
   }
 }

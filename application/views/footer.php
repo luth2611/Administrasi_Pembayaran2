@@ -239,6 +239,11 @@
 <script src="<?php echo base_url() ?>assets/AdminLTE/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url() ?>assets/AdminLTE/dist/js/demo.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+<script src="<?php echo base_url() ?>assets/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+<script src="<?php echo base_url() ?>assets/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+
 <script type="text/javascript">
   
   function openmodal (target,jumlah,jenis,id){ 
@@ -250,5 +255,44 @@
 
 
 </script>
+<script>
+
+    $(document).ready(function() {
+      var baseUrl = $('#base-url').val();
+    $('#tabel-siswa').DataTable( {
+      "processing": false,
+      "serverSide": false,
+      "lengthmenu": [[5,10,15,20],[5,10,15,20]],
+      
+      "ajax": {
+        "url": baseUrl + 'Siswa/getSiswa',
+        "type": "POST",
+        "dataSrc":"Siswa"
+
+
+      },
+      "columns": [
+      {"data":"nis"},
+      {"data":"nama_lengkap"},
+      {"data":"tmpt_lahir"},
+      {"data":"jenis_kel"},
+      {"data":"kelas"},
+      {"data":"alamat"},
+      {"data":"nama_ayah"},
+      {"data":"nama_ibu"},
+      {"data":"pekerjaan_ayah"},
+      {"data":"pekerjaan_ibu"},
+      {"data":"no_telp"},
+      {"data":"tahun_ajaran"}
+      
+
+
+
+      ]
+    } );
+} );
+
+
+  </script>
 </body>
 </html>

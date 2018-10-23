@@ -63,6 +63,10 @@ class Siswa extends CI_Controller {
     redirect('siswa/list_siswa');
   }	
 
-	
+	public function getSiswa(){
+		$data['siswa'] = $this->SiswaModel->getSiswa("*","siswa")->result();
+		echo json_encode($data);
+
+	}
 	
 }

@@ -32,6 +32,10 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/AdminLTE/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
 
 
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -131,18 +135,7 @@
           </a>
          
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Laporan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i>Laporan Tunggakan</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i>Laporan Pembayaran</a></li>
-          </ul>
-        </li>
+        
         
         
         

@@ -14,10 +14,82 @@ class M_transaksi extends CI_Model{
 	public function get() 
 	{
 	  	
-	  	$this->db->select('id_transaksi,id_siswa,id_biaya,sisa_tagihan,status,nominal');
+	  	$this->db->select('*');
 
 		return $this->db->get($this->table_name)->result();
 	
+	}
+
+	public function get_raudoh(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_porseni(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_majalah(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_seragam(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_spp(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_fasilitas(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_manasik(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_pesertabaru(){
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.jumlah, transaksi.sudah_bayar, transaksi.sisa_tagihan, transaksi.keterangan');
+		$this->db->from('transaksi');
+		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
+		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	public function get_by_id($id)
