@@ -1,16 +1,17 @@
-<section class="content-header">   
-    <h1>Transaksi</h1>
+   <section class="content-header">   
+    <h1>SMS Terkirim</h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-dashboard"></i>Logout</a></li>
       </ol>
    </section>
+
     <!-- Main content -->
     <section class="content">
        
        <!-- Your code -->
-    
-     <div class="box box-primary">
-     <div class="box-body">
+  	
+    <div class="box box-primary">
+    <div class="box-body">
     <div class="col-sm-10">
       <div class="row">
         <div class="dropdown">
@@ -54,24 +55,21 @@
       
       
     </div>
-    <table id="myTable" class="table table-bordered table-hover">
-    <thead>
+    <table id="example2" class="table table-bordered table-hover" style="margin-top: 80px;">
       <tr>
-        <th>NIS</th>
-        <th>Nama</th>
-        <th>Jenis Bayar</th>
-        <th>Tanggal Bayar</th>
-        <th>Jumlah</th>
-        <th>Sudah Bayar</th>
-        <th>Sisa Bayar</th>
-        <th>Keterangan</th>
+        <th>No</th>
+        <th>Tanggal</th>
+        <th>Jam</th>
+        <th>Nomor Tujuan</th>
+        <th>Isi Pesan</th>
+        
         <th colspan="2">Aksi</th>
       </tr>
-    </thead>  
+      
     </table>
     </div>
 
-    
+		
       
     </section>
         <!-- right col -->

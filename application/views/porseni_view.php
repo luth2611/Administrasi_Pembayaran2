@@ -1,14 +1,16 @@
-
-
-
+<section class="content-header">   
+    <h1>Transaksi</h1>
+      <ol class="breadcrumb">
+        <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-dashboard"></i>Logout</a></li>
+      </ol>
+   </section>
     <!-- Main content -->
     <section class="content">
        
        <!-- Your code -->
     
-    <div class="box">
-  <h1>Transaksi</h1>
-    <hr>
+     <div class="box box-primary">
+     <div class="box-body">
     <div class="col-sm-10">
       <div class="row">
         <div class="dropdown">
@@ -47,7 +49,8 @@
       
       
     </div>
-    <table id="example2" class="table table-bordered table-hover" style="margin-top: 80px;">
+    <table id="myTable" class="table table-bordered table-hover">
+    <thead>
       <tr>
         <th>NIS</th>
         <th>Nama</th>
@@ -59,7 +62,8 @@
         <th>Keterangan</th>
         <th colspan="2">Aksi</th>
       </tr>
-      
+     
+    </thead> 
     </table>
     </div>
 

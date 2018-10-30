@@ -1,27 +1,28 @@
-     <section class="content-header">
+
+  
+      <section class="content-header">
       <h1>Data Biaya</h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-dashboard"></i>Logout</a></li>
       </ol>
-        </section>   
+    </section>   
     <!-- Main content -->
-        <section class="content">  
+    <section class="content">
+       
        <!-- Your code -->
-		
-
-    <div class="box box-primary">
-	   <div class="box-body">
-        <a href='<?php echo base_url("index.php/biaya/tambah"); ?>'class="btn btn-info btn-md">Tambah Data Biaya</a><br><br>
-      </div>
+        
+       
+		<div class="box box-primary">
+	<div class="box-body">
+  <a href='<?php echo base_url("index.php/biaya/tambah"); ?>'class="btn btn-info btn-md">Tambah Data</a><br><br>
+  </div>
       <table id="myTable" class="table table-bordered table-hover" >
-      <thead>
       <tr>
           <th>Nomor</th>
           <th>Jenis Bayar</th>
           <th>Jumlah</th>
           <th colspan="2">Aksi</th>
       </tr>
-      </thead>
       <?php
       if( ! empty($biaya)){ // Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada
         $i=1;
@@ -33,7 +34,7 @@
         
           
           <td><button onclick=".'"'."openmodal('#ubahbiaya','".$data->jumlah."','".$data->jenis_biaya."','".$data->idbiaya."')".'"'." >Ubah</button></td>
-          <td><a href='".base_url("index.php/biaya/hapus/".$data->idbiaya)."'>Hapus</a></td>
+          <td><a href='".base_url("index.php/biaya/hapus/".$data->jenis_biaya)."'>Hapus</a></td>
           </tr>";
         $i++;
         }
@@ -43,9 +44,8 @@
       ?>
 
 
-      </table>
+    </table>
 		</div>
-    </section>
       
   </section>
   <!-- Modal -->
@@ -82,8 +82,8 @@
    
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
          <?php echo form_close(); ?>
       </div>
     </div>

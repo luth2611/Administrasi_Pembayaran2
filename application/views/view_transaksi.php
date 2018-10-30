@@ -26,25 +26,6 @@
       <th>Keterangan</th>
       <th colspan="2">Aksi</th>
       </tr>
-      <?php
-      if( ! empty($Transaksi)){ // Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada
-        $i=1;
-        foreach($biaya as $data){
-          echo "<tr>
-          <td>".$i."</td>
-          <td>".$data->jenis_biaya."</td>
-          <td>".$data->jumlah."</td>
-        
-          
-          <td><button onclick=".'"'."openmodal('#ubahbiaya','".$data->jumlah."','".$data->jenis_biaya."','".$data->idbiaya."')".'"'." >Ubah</button></td>
-          <td><a href='".base_url("index.php/biaya/hapus/".$data->jenis_biaya)."'>Hapus</a></td>
-          </tr>";
-        $i++;
-        }
-      }else{ // Jika data siswa kosong
-        echo "<tr><td align='center' colspan='7'>Data Tidak Ada</td></tr>";
-      }
-      ?>
 
 
     </table>
@@ -70,7 +51,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <?php echo form_open("biaya/ubah"); ?>
+        <?php echo form_open("transaksi/spp_view"); ?>
       <table cellpadding="8" class="table table-bordered table-hover">
         <tr>
           <td>Jenis Biaya</td>

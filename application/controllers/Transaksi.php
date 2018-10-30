@@ -90,4 +90,24 @@ class Transaksi extends CI_Controller {
 		# code...
 	}
 
+	public function bayar_spp(){
+
+		$this->load->model('M_transaksi');
+		$nis=$this->input->post('nis_bayar');
+		$jumlah=$this->input->post('jumlah_bayar');
+		$bulan=$this->input->post('bulan_bayar');
+		$tahun_ajaran=$this->input->post('tahun_ajaran_bayar');
+		$this->load->model('BiayaModel');
+		$biaya = $this->BiayaModel->get_view_by("SPP BULANAN");
+		$sisa_bayar = $biaya - $jumlah;
+		if($jumlah == 0){
+			$keterangan = "LUNAS";
+		}else{
+			$keterangan = "BELUM LUNAS";
+		}
+		$tanggal = date("Y-m-d");
+		$this->M_transaksi->get_view_by();
+
+	}
+
 }

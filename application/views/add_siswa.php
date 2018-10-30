@@ -1,15 +1,20 @@
 
-
+    <section class="content-header">
+      <h1>Data Siswa</h1>
+      <ol class="breadcrumb">
+        <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-dashboard"></i>Logout</a></li>
+      </ol>
+    </section>  
 
     <!-- Main content -->
     <section class="content">
        
        <!-- Your code -->
         
-  <div class="box">
+    <div class="box box-primary">
+    <div class="box-body">
 		
-	<h1>Tambah Data Siswa</h1>
-    <hr>
+    
     <div style="color: red;"><?php echo validation_errors(); ?></div>
     <?php echo form_open("siswa/tambah"); ?>
       <table cellpadding="8" class="table table-bordered table-hover" >
@@ -67,17 +72,14 @@
         
       </table>
       </div>
-        
-      <hr>
-
-      <div align="right">
-      <div class="col-sm-3">
-      <input type="submit" name="submit" value="Simpan"class="btn btn-info btn-md"></div>
-      <div class="col-sm-3">
-      <a href="<?php echo base_url(); ?>"><input type="button" value="Batal"class="btn btn-info btn-md"></a></div>
-      </div>
+      </div>  
       
+
+    
+      <input type="submit" name="submit" value="Simpan"class="btn btn-info btn-md">
+      <a href="<?php echo base_url(); ?>"><input type="button" value="Batal" class="btn btn-info btn-md"></a>
     <?php echo form_close(); ?>
+   
 
 		</center>
       

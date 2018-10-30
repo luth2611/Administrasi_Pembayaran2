@@ -4,7 +4,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2018 <a href="https://adminlte.io"></a>.</strong> All rights
+    <strong>Copyright &copy; 2018 <a href="https://adminlte.io">Luth Project</a>.</strong> All rights
     reserved.
 </footer>
 
@@ -62,22 +62,6 @@
     $(target).modal('show');
   }
 
-  function openmodal(target,nis,nama_lengkap,jenis_kel,kelas,alamat,nama_ayah,nama_ibu,pekerjaan_ayah,pekerjaan_ibu,no_telp,tahun_ajaran){
-    $('#nis').val(nis);
-    $('#nama-lengkap-ubah').val(nama_lengkap);
-    $('#jenis-kel-ubah').val(jenis_kel);
-    $('#kelas-ubah').val(kelas);
-    $('#alamat-ubah').val(alamat);
-    $('#nama-ayah-ubah').val(nama_ayah);
-    $('#nama-ibu-ubah').val(nama_ibu);
-    $('#pekerjaan-ayah-ubah').val(pekerjaan_ayah);
-    $('#pekerjaan-ibu-ubah').val(pekerjaan_ibu);
-    $('#no-telp-ubah').val(no_telp);
-    $('#tahun-ajaran-ubah').val(tahun_ajaran);
-    $(target).modal('show');
-
-  }
-
 
 </script>
 <script>
@@ -118,6 +102,6 @@
 // } );
 
 
-//        </script>
-    </body>
+//   </script>
+</body>
 </html>

@@ -51,7 +51,7 @@ class BiayaModel extends CI_Model {
   
   // Fungsi untuk melakukan menghapus data siswa berdasarkan NIS siswa
   public function delete($jenis_biaya){
-    $this->db->where('jenis_biaya', $jenis_biaya);
+    $this->db->where('idbiaya', $jenis_biaya);
     $this->db->delete('biaya'); // Untuk mengeksekusi perintah delete data
   }
 }
