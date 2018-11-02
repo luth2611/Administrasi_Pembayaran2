@@ -6,23 +6,19 @@ class Transaksi extends CI_Controller {
 	public function index()
 	{
 		$this->load->model('M_transaksi');
-
-		$data['transaksi'] = $this->M_transaksi->get();
-		$this->load->library('cart');
-		$this->load->view('header.php');
-		$this->load->view('footer.php');
-	}
-
-	
-
-	public function SPP()
-	{
-		$this->load->model('M_transaksi');
+		$this->load->model('SiswaModel');
+		$this->load->model('BiayaModel');
+		$data["siswa"] = $this->SiswaModel->view();
+		$data["biaya"] = $this->BiayaModel->view();
 		$data["spp"] = $this->M_transaksi->get_spp();	
 		$this->load->view('header');
 		$this->load->view('spp_view.php',$data);
 		$this->load->view('footer');
 	}
+
+	
+
+	
 
 	public function manasik()
 	{
@@ -108,6 +104,10 @@ class Transaksi extends CI_Controller {
 		$tanggal = date("Y-m-d");
 		$this->M_transaksi->get_view_by();
 
+	}
+
+	public function cetak_pembayaran(){
+		$this->load->view('tes_print');
 	}
 
 }

@@ -55,14 +55,14 @@
     $('#myTable').DataTable();
   } );
   
-  function openmodal (target,jumlah,jenis,id){ 
+  function openmodalBiaya (target,jumlah,jenis,id){ 
     $('#jumlah').val(jumlah);
     $('#jenis-biaya-ubah').val(jenis);
     $('#id-ubah').val(id);
     $(target).modal('show');
   }
 
-  function openmodal(target,nis,nama_lengkap,jenis_kel,kelas,alamat,nama_ayah,nama_ibu,pekerjaan_ayah,pekerjaan_ibu,no_telp,tahun_ajaran){
+  function openmodalSiswa(target,nis,nama_lengkap,jenis_kel,kelas,alamat,nama_ayah,nama_ibu,pekerjaan_ayah,pekerjaan_ibu,no_telp,tahun_ajaran,ubah_biaya = null){
     $('#nis').val(nis);
     $('#nama-lengkap-ubah').val(nama_lengkap);
     $('#jenis-kel-ubah').val(jenis_kel);
@@ -75,6 +75,13 @@
     $('#no-telp-ubah').val(no_telp);
     $('#tahun-ajaran-ubah').val(tahun_ajaran);
     $(target).modal('show');
+
+  }
+
+  function openmodalBayar(target,jenis,jumlah){
+    $('#jenis-biaya').val(jenis);
+    $('#jumlah').val(jumlah);
+    $(target).modal('show');    
 
   }
 

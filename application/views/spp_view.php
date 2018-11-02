@@ -14,50 +14,13 @@
     <div class="box-body">
     <div class="col-sm-10">
       <div class="row">
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-right: 5px;">Jenis Bayar</button>
-          <ul class="dropdown-menu">
-          <li><a href="<?php echo base_url();?>index.php/transaksi/spp">SPP</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/raudoh">Raudoh</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/majalah">Majalah</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/seragam">Seragam</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/fasilitas">Fasilitas Sekolah</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/manasik">Manasik</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/pesertabaru">Pesertabaru</a></li>
-          <li><a href="<?php echo base_url();?>index.php/transaksi/porseni">Porseni</a></li>
-          </ul>
-        </div>
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-right: 5px;">Kelas</button>
-          <ul class="dropdown-menu">
-          <li><a href="<?php echo base_url();?>index.php/transaksi/spp">A</a></li>
-          </ul>
-        </div>
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-right: 5px;">Tahun Ajaran</button>
-          <ul class="dropdown-menu">
-          <li><a href="<?php echo base_url();?>index.php/transaksi/spp">2017/2018</a></li>
-          </ul>
-        </div>
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-right: 5px;">Bulan</button>
-          <ul class="dropdown-menu">
-          <li><a href="<?php echo base_url();?>index.php/transaksi/spp">Januari</a></li>
-          </ul>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Cetak">
-        <?php echo"
-        <button onclick=".'"'."openmodal('#bayar')".'"'." class='btn btn-primary'>Bayar</button>";
-        ?>
+       
+        
+        
+        
       </div>
     </div>
-    <div class="col-sm-2">
-    <input type="text" name="nis" class="form-control" placeholder="NIS" id="nis">
-      
-      
-      
-      
-    </div>
+    
     <table id="myTable" class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -69,30 +32,42 @@
         <th>Sudah Bayar</th>
         <th>Sisa Bayar</th>
         <th>Keterangan</th>
-        <th colspan="2">Aksi</th>
+        <th>Aksi</th>
       </tr>
-
-      <?php
+      </thead>
+      <tbody>
+        <?php
       if( ! empty($biaya)){ // Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada
         $i=1;
-        foreach($biaya as $data){
+        foreach($siswa as $data){
           echo "<tr>
-          <td>".$i."</td>
-          <td>".$data->jenis_biaya."</td>
-          <td>".$data->jumlah."</td>
-        
-          
-          <td><button onclick=".'"'."openmodal('#bayar','".$data->jumlah."','".$data->jenis_biaya."','".$data->idbiaya."')".'"'." >Ubah</button></td>
-          <td><a href='".base_url("index.php/view_transaksi/bayar/".$data->idbiaya)."'>Hapus</a></td>
-          </tr>";
+          <td rowspan ='8'>".$data->nis."</td>
+          <td rowspan ='8'>".$data->nama_lengkap."</td>";
+          foreach ($biaya as $bi) {
+            echo "<td style='display: none;'></td>
+                  <td>".$bi->jenis_biaya."</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                  
+                  <button onclick=".'"'."openmodalBayar('#bayar')".'"'." class='btn btn-primary'>Bayar</button>
+                  <a href='".base_url()."index.php/Transaksi/cetak_pembayaran/' class= 'btn btn-primary' >Cetak<Cetak/a>
+                  </td>
+
+                </tr>
+                ";
+          }
         $i++;
         }
       }else{ // Jika data siswa kosong
         echo "<tr><td align='center' colspan='7'>Data Tidak Ada</td></tr>";
       }
       ?>
-      </thead>
-      
+
+      </tbody>
     </table>
 
     <div class="modal fade" id="bayar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -108,24 +83,16 @@
         <?php echo form_open("biaya/ubah"); ?>
       <table cellpadding="8" class="table table-bordered table-hover">
         <tr>
-          <td>NIS</td>
-          <td><input id="nis-bayar" type="text" name="nis_bayar"></td>
+          <td>Jenis Biaya</td>
+          <td><input id="jenis-biaya-bayar" type="text" name="jenis_biaya_bayar"></td>
         </tr>
         <tr>
           <td>Jumlah</td>
           <td><input id="jumlah-bayar" type="text" name="jumlah_bayar" ></td>
           
         </tr>
-        <tr>
-          <td>Bulan</td>
-          <td><input id="bulan-bayar" type="text" name="bulan_bayar" ></td>
-          
-        </tr>
-        <tr>
-          <td>Tahun Ajaran</td>
-          <td><input id="tahun-ajaran-bayar" type="text" name="tahun_ajaran_bayar" ></td>
-          
-        </tr>
+       
+       
         
         
       </table>

@@ -142,7 +142,7 @@ desired effect
           </ul>
         </li>
         <li>
-          <a href="<?php echo base_url()."index.php/Transaksi/spp/"?>">
+          <a href="<?php echo base_url()."index.php/Transaksi/"?>">
             <i class="fa fa-laptop"></i>
             <span>Transaksi</span>
             <span class="pull-right-container">
