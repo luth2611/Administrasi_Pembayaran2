@@ -10,15 +10,23 @@ class Transaksi extends CI_Controller {
 		$this->load->model('BiayaModel');
 		$data["siswa"] = $this->SiswaModel->view();
 		$data["biaya"] = $this->BiayaModel->view();
-		$data["spp"] = $this->M_transaksi->get_spp();	
+		$data["spp"] = $this->M_transaksi->get_spp();
 		$this->load->view('header');
 		$this->load->view('spp_view.php',$data);
 		$this->load->view('footer');
 	}
 
-	
+	public function getTransaksi($nis){
+		$this->load->model('M_transaksi');
+		$data['trs'] = $this->M_transaksi->getTransaksi($nis)->result();
+		echo json_encode($data);
+	}
 
-	
+	public function getJumlahJenisBiaya($idBiaya){
+		$this->load->model('M_transaksi');
+		$biaya = $this->M_transaksi->getData('biaya','*',array('idbiaya'=>$idBiaya))->result();
+		echo json_encode($biaya);
+	}
 
 	public function manasik()
 	{
