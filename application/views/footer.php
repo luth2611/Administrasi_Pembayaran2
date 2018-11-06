@@ -81,7 +81,7 @@
     $(target).modal('show');
 
   }
-
+ 
   function openmodalBayar(target,nis){
 
     var baseUrl = $('#base-url').val();
@@ -89,10 +89,11 @@
     
     $('#tabel-bayar-transaksi').DataTable( {
       "processing": false,
+      "paging":true,
+      "pageLength":5,
       "destroy":true,
       "serverSide": false,
-      "lengthMenu": [5,10,15],
-      
+      "lengthMenu": [[5,10,15],[5,10,15]],
       "ajax": {
         "url": baseUrl + 'Transaksi/getTransaksi/'+nis,
         "type": "POST",
@@ -107,8 +108,14 @@
         render:function(data,type,row){
           var i = 0
           i = row['jumlah'] - data;
-          return i;
+          if(i == 0){
+            return "Lunas";
+          }else{
+            return i;
+          }
       }},
+      {"data":"bulan"},
+      {"data":"tahun_ajaran"},
       {"data":"sudah_bayar",render:function(data,type,row){
         var i = 0
         i = row['jumlah'] - data;
@@ -140,21 +147,59 @@
 <script>
   var baseUrl = $('#base-url').val();
   var i = 0;
+  // var tanggungan = null;
   $('#jenis-biaya-bayar').on('change',function(){
+    var nis = $('#nis-bayar').val();
     var idBiaya =  $('#jenis-biaya-bayar').val();
+   
     if(idBiaya == 12 || idBiaya == 16){
       $('#bulan-bayar').removeAttr('disabled');
     }else{
       $('#bulan-bayar').attr('disabled','disabled');
     }
-
     $.ajax({url:baseUrl+'Transaksi/getJumlahJenisBiaya/'+idBiaya,success:function(res){
       res = JSON.parse(res);
      $.each(res,function(i,v){
       $('#tanggungan').val(v.jumlah);
      });
     }});
+    $.ajax({url:baseUrl+'Transaksi/getSisaBayar/'+ nis +'/'+idBiaya,success:function(res){
+      res = JSON.parse(res);
+     $.each(res,function(i,v){
+        if(v.sisa_bayar == 0){
+          $('#sisa-bayar').val('Lunas');
+        }else if(v.sisa_bayar == null){
+          $('#sisa-bayar').val(v.jumlah);
+        }else{
+          $('#sisa-bayar').val(v.sisa_bayar);
+        }
+     });
+    }});
   });
+</script>
+<script>
+  $('.form-transaksi').submit(function(e){
+    var baseUrl = $('#base-url').val();
+    var form = $(this);
+    $.ajax({
+        type:"POST",
+        url:baseUrl+"Transaksi/addTransaksi",
+        data: form.serialize(),
+        success: function(res){
+          alert('Berhasil');
+          $('#tanggungan').val('');
+          $('#tahun-ajaran').val('');
+          $('#jumlah-bayar').val('');
+          $('#keterangan-bayar').val('');
+          $('#bulan-bayar').val('');
+          $('#jenis-biaya-bayar').val('');
+          $('#bulan-bayar').attr('disabled','disabled');
+          var tabel = $('#tabel-bayar-transaksi').DataTable();
+          tabel.ajax.reload();
+        }
+    })
+    e.preventDefault();
+  })
 </script>
     </body>
 </html>

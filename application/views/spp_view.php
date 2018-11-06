@@ -65,7 +65,7 @@
             <tr>
               <td>Jenis Biaya</td>
               <td><select class="form-control"  name="jenis_biaya_bayar" id="jenis-biaya-bayar">
-                    <option>Pilih Jenis Biaya</option>
+                    <option value=''>Pilih Jenis Biaya</option>
                     <?php
                       foreach($biaya as $data){
                         echo "<option value='".$data->idbiaya."'>".$data->jenis_biaya."</option>";
@@ -74,8 +74,8 @@
               </select>
               </td>
               <td>Bulan</td>
-              <td><select class="col-lg-4 form-control" name="jenis_biaya_bayar" id="bulan-bayar" disabled>
-                      <option>Pilih Bulan</option>
+              <td><select class="col-lg-4 form-control" name="bulan_bayar" id="bulan-bayar" disabled>
+                      <option value=''>Pilih Bulan</option>
                     <?php $bulan = array('Januari','Pebruari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','Nopember','Desember'); 
                       foreach($bulan as $data){
                         echo "<option value=".$data.">".$data."</option>";
@@ -87,30 +87,38 @@
             </tr>
             <tr>
               <td>Tanggungan</td>
-              <td><input class="form-control" placeholder="Jumlah yang harus dibayar"  id="tanggungan" type="number" readonly></td>
-              <td>Tahun Ajaran</td>
-              <td><input type='text' name='tahun_ajaran' class='form-control'></td>            
+              <td><input class="form-control" type="number" placeholder="Jumlah yang harus dibayar"  id="tanggungan"  readonly></td>
+              <td>Sisa Bayar</td>
+              <td><input type='text' id='sisa-bayar' placeholder="Sisa yang harus dibayarkan" class='form-control' readonly></td>            
             </tr> 
             <tr>
               <td>Jumlah Bayar</td>
-              <td colspan='3'><input class="form-control" placeholder="Jumlah yang akan dibayar" id="jumlah-bayar" type="number" name="jumlah_bayar" ></td>
+              <td><input class="form-control" type="number" name="jumlah_bayar"  id="jumlah-bayar"  placeholder="Jumlah yang akan dibayar"></td>
+              <td>Tahun Ajaran</td>
+              <td><input type='text' name='tahun_ajaran' placeholder='Tahun ajaran' id="tahun-ajaran" class='form-control'></td>            
+            </tr> 
+            <tr>
+              <td>Keterangan</td>
+              <td colspan='3'><textarea class = 'form-control' name="keterangan_bayar" id="keterangan-bayar"></textarea></td>
               <td></td>
               <td></td>            
-            </tr>   
+            </tr>  
           </table>
-          <input type="hidden" id='nis-bayar'>
+          <input type="hidden" id='nis-bayar' name='nis_bayar'>
           <div class="col-md-offset-11" style="margin-bottom:15px;margin-top:-15px">
-            <button type="submit" class="btn btn-success">Bayar</button>
+            <button type="submit" id="btn-submit" class="btn btn-success">Bayar</button>
           </div>
           </form>
           <table id="tabel-bayar-transaksi" class="table table-bordered table-hover table-responsives">
         <thead>
           <tr>
             <th>NIS</th>
-            <th>Nama Lengkap</th>
+            <th>Nama</th>
             <th>Jenis Biaya</th>
             <th>Sudah Bayar</th>
             <th>Sisa Bayar</th>
+            <th>Bulan</th>
+            <th>Tahun Ajaran</th>
             <th>Status</th>
             <th>Aksi</th>
           </tr>

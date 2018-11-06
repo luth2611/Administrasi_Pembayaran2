@@ -11,14 +11,28 @@ class M_transaksi extends CI_Model{
 	
 	}
 
+	public function addTransaksi($table,$data){
+		$this->db->insert($table,$data);
+		return true;
+	}
+
 	public function getTransaksi($nis){
-		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,transaksi.sudah_bayar 
+		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran,transaksi.bulan 
 		FROM `siswa`,transaksi,biaya
 		where transaksi.nis = siswa.nis
 		and transaksi.jenis_biaya = biaya.idbiaya
-		and siswa.nis = '.$nis;
+		and siswa.nis = '.$nis.'
+        group by idbiaya ';
 		return $this->db->query($query);
 
+	}
+	public function getSisaBayar($nis,$idbiaya){
+		$query = 'select biaya.jumlah - sum(transaksi.sudah_bayar) as sisa_bayar,biaya.jumlah
+		from transaksi,biaya
+		where transaksi.jenis_biaya = biaya.idbiaya
+		and nis = '.$nis.'
+		and transaksi.jenis_biaya = '.$idbiaya;
+		return $this->db->query($query);
 	}
 	public function getData($table,$select,$where = null){
 		$this->db->select($select);
