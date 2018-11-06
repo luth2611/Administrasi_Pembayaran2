@@ -8,6 +8,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>App Administrasi Pembayaran</title>
+  <style>
+  th { font-size: 13px;text-align:center; }
+  td { font-size: 12px;text-align:center; }
+  </style>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -18,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- add css plugin -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <!-- end css plugin -->
 
   <!-- Theme style -->

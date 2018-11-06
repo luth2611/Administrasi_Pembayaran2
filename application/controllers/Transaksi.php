@@ -10,15 +10,45 @@ class Transaksi extends CI_Controller {
 		$this->load->model('BiayaModel');
 		$data["siswa"] = $this->SiswaModel->view();
 		$data["biaya"] = $this->BiayaModel->view();
-		$data["spp"] = $this->M_transaksi->get_spp();	
+		$data["spp"] = $this->M_transaksi->get_spp();
 		$this->load->view('header');
 		$this->load->view('spp_view.php',$data);
 		$this->load->view('footer');
 	}
 
-	
+	public function getTransaksi($nis){
+		$this->load->model('M_transaksi');
+		$data['trs'] = $this->M_transaksi->getTransaksi($nis)->result();
+		echo json_encode($data);
+	}
+	public function getSisaBayar($nis,$idbiaya){
+		$this->load->model('M_transaksi');
+		$data = $this->M_transaksi->getSisaBayar($nis,$idbiaya)->result();
+		echo json_encode($data);
+	}
 
-	
+	public function addTransaksi(){
+		$this->load->model('M_transaksi');
+		$data['nis'] = $this->input->post('nis_bayar');
+		$data['jenis_biaya'] = $this->input->post('jenis_biaya_bayar');
+		$data['tanggal_bayar'] = date('Y-m-d');
+		if($data['jenis_biaya'] == 12 || $data['jenis_biaya'] == 16){
+			$data['bulan'] = $this->input->post('bulan_bayar');
+		}
+		$data['keterangan'] = $this->input->post('keterangan_bayar');
+		$data['sudah_bayar'] = $this->input->post('jumlah_bayar');
+		$data['tahun_ajaran'] = $this->input->post('tahun_ajaran');
+
+		$this->M_transaksi->addTransaksi('transaksi',$data);
+		echo json_encode('1');
+		
+	}
+
+	public function getJumlahJenisBiaya($idBiaya){
+		$this->load->model('M_transaksi');
+		$biaya = $this->M_transaksi->getData('biaya','*',array('idbiaya'=>$idBiaya))->result();
+		echo json_encode($biaya);
+	}
 
 	public function manasik()
 	{

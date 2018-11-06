@@ -46,13 +46,17 @@
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
 <script src="<?php echo base_url() ?>assets/datatables/js/jquery.datatables.min.js"></script>
 <script src="<?php echo base_url() ?>assets/datatables/js/datatables.bootstrap.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 
 <script type="text/javascript">
 
   $(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({
+      'columnDefs':[
+        {"className":"dt-body-center"}
+      ]
+    });
   } );
   
   function openmodalBiaya (target,jumlah,jenis,id){ 
@@ -77,54 +81,125 @@
     $(target).modal('show');
 
   }
+ 
+  function openmodalBayar(target,nis){
 
-  function openmodalBayar(target,jenis,jumlah){
-    $('#jenis-biaya').val(jenis);
-    $('#jumlah').val(jumlah);
+    var baseUrl = $('#base-url').val();
+    $('#nis-bayar').val(nis);
+    
+    $('#tabel-bayar-transaksi').DataTable( {
+      "processing": false,
+      "paging":true,
+      "pageLength":5,
+      "destroy":true,
+      "serverSide": false,
+      "lengthMenu": [[5,10,15],[5,10,15]],
+      "ajax": {
+        "url": baseUrl + 'Transaksi/getTransaksi/'+nis,
+        "type": "POST",
+        "dataSrc":"trs"
+      },
+      "columns": [
+      {"data":"nis"},
+      {"data":"nama_lengkap"},
+      {"data":"jenis_biaya"},
+      {"data":"sudah_bayar"},
+      {"data":"sudah_bayar",
+        render:function(data,type,row){
+          var i = 0
+          i = row['jumlah'] - data;
+          if(i == 0){
+            return "Lunas";
+          }else{
+            return i;
+          }
+      }},
+      {"data":"bulan"},
+      {"data":"tahun_ajaran"},
+      {"data":"sudah_bayar",render:function(data,type,row){
+        var i = 0
+        i = row['jumlah'] - data;
+        if(i == 0){
+          return '<span class="badge badge-success">Lunas</span>'
+        }else{
+          return '<span class="badge badge-danger">Belum Lunas</span>'
+        }
+      }},
+      {"data":"id_transaksi",render:function(data,type,row){
+        var i = 0
+        i = row['jumlah'] - row['sudah_bayar'];
+        if(i == 0){
+          return "";          
+        }else{
+          return "<button class='btn btn-primary'>Bayar</button>";          
+        }
+        
+      }}
+      ]
+    } );
+
+
     $(target).modal('show');    
-
   }
 
 
 </script>
 <script>
-
-//     $(document).ready(function() {
-//       var baseUrl = $('#base-url').val();
-//     $('#tabel-siswa').DataTable( {
-//       "processing": false,
-//       "serverSide": false,
-//       "lengthmenu": [[5,10,15,20],[5,10,15,20]],
-      
-//       "ajax": {
-//         "url": baseUrl + 'Siswa/getSiswa',
-//         "type": "POST",
-//         "dataSrc":"Siswa"
-
-
-//       },
-//       "columns": [
-//       {"data":"nis"},
-//       {"data":"nama_lengkap"},
-//       {"data":"tmpt_lahir"},
-//       {"data":"jenis_kel"},
-//       {"data":"kelas"},
-//       {"data":"alamat"},
-//       {"data":"nama_ayah"},
-//       {"data":"nama_ibu"},
-//       {"data":"pekerjaan_ayah"},
-//       {"data":"pekerjaan_ibu"},
-//       {"data":"no_telp"},
-//       {"data":"tahun_ajaran"}
-      
-
-
-
-//       ]
-//     } );
-// } );
-
-
-//        </script>
+  var baseUrl = $('#base-url').val();
+  var i = 0;
+  // var tanggungan = null;
+  $('#jenis-biaya-bayar').on('change',function(){
+    var nis = $('#nis-bayar').val();
+    var idBiaya =  $('#jenis-biaya-bayar').val();
+   
+    if(idBiaya == 12 || idBiaya == 16){
+      $('#bulan-bayar').removeAttr('disabled');
+    }else{
+      $('#bulan-bayar').attr('disabled','disabled');
+    }
+    $.ajax({url:baseUrl+'Transaksi/getJumlahJenisBiaya/'+idBiaya,success:function(res){
+      res = JSON.parse(res);
+     $.each(res,function(i,v){
+      $('#tanggungan').val(v.jumlah);
+     });
+    }});
+    $.ajax({url:baseUrl+'Transaksi/getSisaBayar/'+ nis +'/'+idBiaya,success:function(res){
+      res = JSON.parse(res);
+     $.each(res,function(i,v){
+        if(v.sisa_bayar == 0){
+          $('#sisa-bayar').val('Lunas');
+        }else if(v.sisa_bayar == null){
+          $('#sisa-bayar').val(v.jumlah);
+        }else{
+          $('#sisa-bayar').val(v.sisa_bayar);
+        }
+     });
+    }});
+  });
+</script>
+<script>
+  $('.form-transaksi').submit(function(e){
+    var baseUrl = $('#base-url').val();
+    var form = $(this);
+    $.ajax({
+        type:"POST",
+        url:baseUrl+"Transaksi/addTransaksi",
+        data: form.serialize(),
+        success: function(res){
+          alert('Berhasil');
+          $('#tanggungan').val('');
+          $('#tahun-ajaran').val('');
+          $('#jumlah-bayar').val('');
+          $('#keterangan-bayar').val('');
+          $('#bulan-bayar').val('');
+          $('#jenis-biaya-bayar').val('');
+          $('#bulan-bayar').attr('disabled','disabled');
+          var tabel = $('#tabel-bayar-transaksi').DataTable();
+          tabel.ajax.reload();
+        }
+    })
+    e.preventDefault();
+  })
+</script>
     </body>
 </html>
