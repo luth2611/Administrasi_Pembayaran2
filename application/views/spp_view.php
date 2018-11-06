@@ -97,19 +97,23 @@
               <td>Tahun Ajaran</td>
               <td><input type='text' name='tahun_ajaran' placeholder='Tahun ajaran' id="tahun-ajaran" class='form-control'></td>            
             </tr> 
-            <tr>
-              <td>Keterangan</td>
-              <td colspan='3'><textarea class = 'form-control' name="keterangan_bayar" id="keterangan-bayar"></textarea></td>
-              <td></td>
-              <td></td>            
-            </tr>  
           </table>
           <input type="hidden" id='nis-bayar' name='nis_bayar'>
           <div class="col-md-offset-11" style="margin-bottom:15px;margin-top:-15px">
             <button type="submit" id="btn-submit" class="btn btn-success">Bayar</button>
           </div>
           </form>
-          <table id="tabel-bayar-transaksi" class="table table-bordered table-hover table-responsives">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="perbulan-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Perbulan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">insidentil</a>
+              </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <table id="tabel-bayar-transaksi-perbulan" class="table table-bordered table-hover table-responsives">
         <thead>
           <tr>
             <th>NIS</th>
@@ -124,10 +128,28 @@
           </tr>
           </thead>
         </table>
-          
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table id="tabel-bayar-transaksi-insidentil" class="table table-bordered table-hover table-responsives">
+        <thead>
+          <tr>
+            <th>NIS</th>
+            <th>Nama</th>
+            <th>Jenis Biaya</th>
+            <th>Sudah Bayar</th>
+            <th>Sisa Bayar</th>
+            <th>Tahun Ajaran</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+          </thead>
+        </table>
+            </div>
           </div>
-         
+        
+          </div>
           <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             
           </div>
         </div>

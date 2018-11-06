@@ -87,15 +87,18 @@
     var baseUrl = $('#base-url').val();
     $('#nis-bayar').val(nis);
     
-    $('#tabel-bayar-transaksi').DataTable( {
+    $('#tabel-bayar-transaksi-perbulan').DataTable( {
       "processing": false,
+      "bLengthChange": false,
+      "searching":false,
+      "bInfo" : false,
       "paging":true,
       "pageLength":5,
       "destroy":true,
       "serverSide": false,
       "lengthMenu": [[5,10,15],[5,10,15]],
       "ajax": {
-        "url": baseUrl + 'Transaksi/getTransaksi/'+nis,
+        "url": baseUrl + 'Transaksi/getTransaksiPerbulan/'+nis,
         "type": "POST",
         "dataSrc":"trs"
       },
@@ -138,6 +141,58 @@
       ]
     } );
 
+ $('#tabel-bayar-transaksi-insidentil').DataTable( {
+      "processing": false,
+      "bLengthChange": false,
+      "searching":false,
+      "bInfo" : false,
+      "paging":true,
+      "pageLength":5,
+      "destroy":true,
+      "serverSide": false,
+      "lengthMenu": [[5,10,15],[5,10,15]],
+      "ajax": {
+        "url": baseUrl + 'Transaksi/getTransaksiInsidentil/'+nis,
+        "type": "POST",
+        "dataSrc":"trs"
+      },
+      "columns": [
+      {"data":"nis"},
+      {"data":"nama_lengkap"},
+      {"data":"jenis_biaya"},
+      {"data":"sudah_bayar"},
+      {"data":"sudah_bayar",
+        render:function(data,type,row){
+          var i = 0
+          i = row['jumlah'] - data;
+          if(i == 0){
+            return "Lunas";
+          }else{
+            return i;
+          }
+      }},
+      {"data":"tahun_ajaran"},
+      {"data":"sudah_bayar",render:function(data,type,row){
+        var i = 0
+        i = row['jumlah'] - data;
+        if(i == 0){
+          return '<span class="badge badge-success">Lunas</span>'
+        }else{
+          return '<span class="badge badge-danger">Belum Lunas</span>'
+        }
+      }},
+      {"data":"id_transaksi",render:function(data,type,row){
+        var i = 0
+        i = row['jumlah'] - row['sudah_bayar'];
+        if(i == 0){
+          return "";          
+        }else{
+          return "<button class='btn btn-primary'>Bayar</button>";          
+        }
+        
+      }}
+      ]
+    } );
 
     $(target).modal('show');    
   }
@@ -167,7 +222,12 @@
       res = JSON.parse(res);
      $.each(res,function(i,v){
         if(v.sisa_bayar == 0){
-          $('#sisa-bayar').val('Lunas');
+          if(idBiaya == 12 || idBiaya == 16){
+            $('#sisa-bayar').val(v.jumlah);          
+          }else{
+            $('#sisa-bayar').val('Lunas');
+
+          }
         }else if(v.sisa_bayar == null){
           $('#sisa-bayar').val(v.jumlah);
         }else{
@@ -192,14 +252,37 @@
           $('#jumlah-bayar').val('');
           $('#keterangan-bayar').val('');
           $('#bulan-bayar').val('');
+          $('#sisa-bayar').val('');
           $('#jenis-biaya-bayar').val('');
           $('#bulan-bayar').attr('disabled','disabled');
-          var tabel = $('#tabel-bayar-transaksi').DataTable();
-          tabel.ajax.reload();
+          var perbulan = $('#tabel-bayar-transaksi-perbulan').DataTable();
+          var insidentil = $('#tabel-bayar-transaksi-insidentil').DataTable();
+          perbulan.ajax.reload();
+          insidentil.ajax.reload();
         }
     })
     e.preventDefault();
   })
+</script>
+<script>
+ $('#bulan-bayar').on('change',function(){
+    var nis = $('#nis-bayar').val();
+    var bulan =  $('#bulan-bayar').val();
+    var idbiaya= $('#jenis-biaya-bayar').val();
+    $.ajax({url:baseUrl+'Transaksi/getSisaBayarPerbulan/'+nis+'/'+bulan+'/'+idbiaya,success:function(res){
+      res = JSON.parse(res);
+     $.each(res,function(i,v){
+        if(v.sisa_bayar == null){
+          $('#sisa-bayar').val(v.jumlah);
+        }else if(v.sisa_bayar == 0){
+          $('#sisa-bayar').val('Lunas');
+        }else{
+          $('#sisa-bayar').val(v.sisa_bayar);
+        }
+     });
+    }});
+  });
+
 </script>
     </body>
 </html>

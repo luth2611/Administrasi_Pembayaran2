@@ -16,12 +16,24 @@ class M_transaksi extends CI_Model{
 		return true;
 	}
 
-	public function getTransaksi($nis){
+	public function getTransaksiPerbulan($nis){
 		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran,transaksi.bulan 
 		FROM `siswa`,transaksi,biaya
 		where transaksi.nis = siswa.nis
 		and transaksi.jenis_biaya = biaya.idbiaya
 		and siswa.nis = '.$nis.'
+		and biaya.status = 2
+		group by transaksi.bulan, biaya.idbiaya';
+		return $this->db->query($query);
+
+	}
+	public function getTransaksiInsidentil($nis){
+		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran 
+		FROM `siswa`,transaksi,biaya
+		where transaksi.nis = siswa.nis
+		and transaksi.jenis_biaya = biaya.idbiaya
+		and siswa.nis = '.$nis.'
+		and biaya.status = 1
         group by idbiaya ';
 		return $this->db->query($query);
 
@@ -31,6 +43,15 @@ class M_transaksi extends CI_Model{
 		from transaksi,biaya
 		where transaksi.jenis_biaya = biaya.idbiaya
 		and nis = '.$nis.'
+		and transaksi.jenis_biaya = '.$idbiaya;
+		return $this->db->query($query);
+	}
+	public function getSisaBayarPerbulan($nis,$bulan,$idbiaya){
+		$query = 'select biaya.jumlah - sum(transaksi.sudah_bayar) as sisa_bayar,biaya.jumlah
+		from transaksi,biaya
+		where transaksi.jenis_biaya = biaya.idbiaya
+		and nis = '.$nis.'
+		and bulan ="'.$bulan.'"
 		and transaksi.jenis_biaya = '.$idbiaya;
 		return $this->db->query($query);
 	}
@@ -54,7 +75,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_raudoh(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar,transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -63,7 +84,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_porseni(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar, transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -72,7 +93,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_majalah(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar,transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -81,7 +102,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_seragam(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar,  transaksi.sudah_bayar,transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar,  transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -90,7 +111,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_spp(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar,  transaksi.sudah_bayar,transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar,  transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -99,7 +120,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_fasilitas(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar, transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -108,7 +129,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_manasik(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar, transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar, transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');
@@ -117,7 +138,7 @@ class M_transaksi extends CI_Model{
 	}
 
 	public function get_pesertabaru(){
-		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar,transaksi.sudah_bayar,  transaksi.keterangan');
+		$this->db->select('siswa.nis, siswa.nama_lengkap, biaya.jenis_biaya, transaksi.tanggal_bayar,transaksi.sudah_bayar');
 		$this->db->from('transaksi');
 		$this->db->join('siswa', 'transaksi.nis = siswa.nis');
 		$this->db->join('biaya', 'transaksi.jenis_biaya = biaya.idbiaya');

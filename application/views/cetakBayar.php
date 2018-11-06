@@ -47,14 +47,15 @@
 	<table id="cetak_bayar">
   <tr>
     <th>No</th>
-    <th>NIS</th>
-    <th>Nama</th>
-    <th>Kelas</th>
     <th>Bulan</th>
     <th>Tanggal Bayar</th>
     <th>Keterangan</th>
   </tr>
+  <?php  
+      foreach($trs as $value){
 
+      }
+  ?>
   <tr>
     <td>1</td>
     <td>133040287</td>
