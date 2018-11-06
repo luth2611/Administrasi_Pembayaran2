@@ -129,12 +129,12 @@
         }
       }},
       {"data":"id_transaksi",render:function(data,type,row){
-        var i = 0
-        i = row['jumlah'] - row['sudah_bayar'];
-        if(i == 0){
+        var temp = 0
+        temp = row['jumlah'] - row['sudah_bayar'];
+        if(temp == 0){
           return "";          
         }else{
-          return "<button class='btn btn-primary'>Bayar</button>";          
+          return "<a href='#jenis-biaya-bayar' onclick='bayarPerbulan("+row['idbiaya']+","+'"'+row['bulan']+'"'+","+row['jumlah']+","+temp+","+'"'+row['tahun_ajaran']+'"'+")'  class='btn btn-primary'>Bayar</a>";          
         }
         
       }}
@@ -182,12 +182,12 @@
         }
       }},
       {"data":"id_transaksi",render:function(data,type,row){
-        var i = 0
-        i = row['jumlah'] - row['sudah_bayar'];
-        if(i == 0){
+        var temp = 0
+        temp = row['jumlah'] - row['sudah_bayar'];
+        if(temp == 0){
           return "";          
         }else{
-          return "<button class='btn btn-primary'>Bayar</button>";          
+          return "<a href='#jenis-biaya-bayar' onclick='bayarInsidentil("+row['idbiaya']+","+row['jumlah']+","+temp+","+'"'+row['tahun_ajaran']+'"'+")'  class='btn btn-primary'>Bayar</a>";          
         }
         
       }}
@@ -196,9 +196,30 @@
 
     $(target).modal('show');    
   }
-
-
 </script>
+<script>
+function bayarPerbulan(idBiaya,bulan,tanggungan,sisaBayar,tahunAjaran){
+  $('#jenis-biaya-bayar').val(idBiaya);
+  $('#bulan-bayar').val(bulan);
+  $('#tanggungan').val(tanggungan);
+  $('#sisa-bayar').val(sisaBayar);
+  $('#tahun-ajaran').val(tahunAjaran);
+  $('#bulan-bayar').removeAttr('disabled');
+ 
+
+}
+function bayarInsidentil(idBiaya,tanggungan,sisaBayar,tahunAjaran){
+  $('#jenis-biaya-bayar').val(idBiaya);
+  $('#tanggungan').val(tanggungan);
+  $('#sisa-bayar').val(sisaBayar);
+  $('#tahun-ajaran').val(tahunAjaran);
+  $('#bulan-bayar').val('');  
+  $('#bulan-bayar').attr('disabled','disabled');
+ 
+
+}
+</script>
+
 <script>
   var baseUrl = $('#base-url').val();
   var i = 0;
@@ -211,6 +232,7 @@
       $('#bulan-bayar').removeAttr('disabled');
     }else{
       $('#bulan-bayar').attr('disabled','disabled');
+      $('#bulan-bayar').val('');
     }
     $.ajax({url:baseUrl+'Transaksi/getJumlahJenisBiaya/'+idBiaya,success:function(res){
       res = JSON.parse(res);

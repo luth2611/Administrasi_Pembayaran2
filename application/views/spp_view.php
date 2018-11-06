@@ -108,11 +108,11 @@
                 <a class="nav-link active" id="perbulan-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Perbulan</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">insidentil</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Insidentil</a>
               </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
             <table id="tabel-bayar-transaksi-perbulan" class="table table-bordered table-hover table-responsives">
         <thead>
           <tr>
