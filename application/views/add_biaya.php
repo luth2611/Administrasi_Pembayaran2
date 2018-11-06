@@ -1,7 +1,7 @@
     <section class="content-header">
       <h1>Data Biaya</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-dashboard"></i>Logout</a></li>
+        <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-sign-out"></i>Logout</a></li>
       </ol>
     </section>  
  

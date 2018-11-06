@@ -1,11 +1,11 @@
      <section class="content-header">
-      <h1>Data Biaya</h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-dashboard"></i>Logout</a></li>
-      </ol>
-        </section>   
+           <h1>Data Biaya</h1>
+           <ol class="breadcrumb">
+              <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-sign-out"></i>Logout</a></li>
+           </ol>
+     </section>   
     <!-- Main content -->
-        <section class="content">  
+  <section class="content">  
        <!-- Your code -->
 		
 
@@ -55,6 +55,10 @@
     </div>
   </div>
 </section>
+
+
+
+
   <!-- Modal -->
 <div class="modal fade" id="ubahbiaya" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
