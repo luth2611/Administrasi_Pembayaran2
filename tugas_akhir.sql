@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Okt 2018 pada 07.46
+-- Generation Time: 06 Nov 2018 pada 08.44
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -30,22 +30,23 @@ CREATE TABLE IF NOT EXISTS `biaya` (
   `idbiaya` int(15) NOT NULL AUTO_INCREMENT,
   `jenis_biaya` varchar(25) NOT NULL,
   `jumlah` int(25) NOT NULL,
+  `status` char(1) NOT NULL,
   PRIMARY KEY (`idbiaya`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data untuk tabel `biaya`
 --
 
-INSERT INTO `biaya` (`idbiaya`, `jenis_biaya`, `jumlah`) VALUES
-(6, 'BANGUNAN', 150000),
-(7, 'MANASIK HAJI', 190000),
-(8, 'SERAGAM', 100000),
-(9, 'PESERTA BARU', 150000),
-(12, 'SPP BULANAN', 985001),
-(14, 'FASILITAS ', 150000),
-(15, 'RAUDOH', 25000),
-(16, 'MAJALAH', 20000);
+INSERT INTO `biaya` (`idbiaya`, `jenis_biaya`, `jumlah`, `status`) VALUES
+(7, 'MANASIK HAJI', 200000, '1'),
+(8, 'SERAGAM', 120000, ''),
+(9, 'PESERTA DIDIK BARU', 159000, '1'),
+(12, 'SPP BULANAN', 985001, '2'),
+(14, 'FASILITAS', 155000, '1'),
+(15, 'RAUDOH (PAKET BACA TULIS)', 25000, '1'),
+(18, 'MAJALAH BULANAN', 65500, '2'),
+(19, 'PORSENI ', 190000, '1');
 
 -- --------------------------------------------------------
 
@@ -55,30 +56,28 @@ INSERT INTO `biaya` (`idbiaya`, `jenis_biaya`, `jumlah`) VALUES
 
 CREATE TABLE IF NOT EXISTS `siswa` (
   `nis` int(10) NOT NULL AUTO_INCREMENT,
-  `nama_lengkap` varchar(11) NOT NULL,
+  `nama_lengkap` varchar(35) NOT NULL,
   `tmpt_lahir` date NOT NULL,
   `jenis_kel` varchar(10) NOT NULL,
   `kelas` varchar(11) NOT NULL,
-  `alamat` varchar(30) NOT NULL,
-  `nama_ayah` varchar(20) NOT NULL,
-  `nama_ibu` varchar(20) NOT NULL,
-  `pekerjaan_ayah` varchar(20) NOT NULL,
-  `pekerjaan_ibu` varchar(20) NOT NULL,
+  `alamat` varchar(70) NOT NULL,
+  `nama_ayah` varchar(30) NOT NULL,
+  `nama_ibu` varchar(30) NOT NULL,
+  `pekerjaan_ayah` varchar(30) NOT NULL,
+  `pekerjaan_ibu` varchar(30) NOT NULL,
   `no_telp` int(15) NOT NULL,
   `tahun_ajaran` varchar(20) NOT NULL,
   PRIMARY KEY (`nis`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=133040888 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=133040346 ;
 
 --
 -- Dumping data untuk tabel `siswa`
 --
 
 INSERT INTO `siswa` (`nis`, `nama_lengkap`, `tmpt_lahir`, `jenis_kel`, `kelas`, `alamat`, `nama_ayah`, `nama_ibu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `no_telp`, `tahun_ajaran`) VALUES
-(133040112, 'SALSABILA', '2018-10-02', 'Perempuan', 'E', 'MEDAN', 'R', 'T', 'R', 'W', 99282828, '2017/2018'),
-(133040254, 'PUTRI', '2018-10-03', 'Perempuan', 'C', 'SURABAYA', 'U', 'I', 'N', 'M', 2147483647, '2017/2018'),
-(133040289, 'SISKA', '2018-10-07', 'Perempuan', 'B', 'JAKARTA', 'Q', 'W', 'H', 'J', 2147483647, '2017/2018'),
-(133040567, 'NINDI', '2018-10-06', 'Perempuan', 'F', 'SURABAYA', 'B', 'N', 'M', 'K', 87272727, '2017/2018'),
-(133040887, 'DINDA', '2018-10-31', 'Perempuan', 'D', 'MALANG', 'X', 'C', 'T', 'R', 2147483647, '2017/2018');
+(133040287, 'LUTHFI', '2018-11-07', '', 'X', 'BANDUNG', 'JONI', 'MRS', 'A', 'B', 813124106, '2017/2018'),
+(133040288, 'AGUS', '2018-11-30', 'Laki-laki', 'X', 'JAKARTA', 'BANGJON', 'MBAJON', 'K', 'L', 93090319, '2017/2018'),
+(133040345, 'SANDRA', '2018-11-02', 'Perempuan', 'C', 'YOGYAKARTA', 'UMAR', 'NINDA', 'A', 'B', 12345678, '2017/2018');
 
 -- --------------------------------------------------------
 
@@ -103,23 +102,33 @@ CREATE TABLE IF NOT EXISTS `sms` (
 CREATE TABLE IF NOT EXISTS `transaksi` (
   `id_transaksi` int(10) NOT NULL AUTO_INCREMENT,
   `nis` int(10) NOT NULL,
+  `nama_lengkap` varchar(30) NOT NULL,
   `jenis_biaya` int(15) NOT NULL,
+  `jumlah` int(25) NOT NULL,
   `tanggal_bayar` date NOT NULL,
   `bulan` varchar(10) NOT NULL,
-  `jumlah` int(20) NOT NULL,
+  `sisa_tagihan` int(25) NOT NULL,
   `sudah_bayar` int(20) NOT NULL,
-  `sisa_tagihan` int(20) NOT NULL,
   `keterangan` varchar(10) NOT NULL,
   `tahun_ajaran` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_transaksi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id_transaksi`),
+  KEY `nis` (`nis`),
+  KEY `jenis_biaya` (`jenis_biaya`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data untuk tabel `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `nis`, `jenis_biaya`, `tanggal_bayar`, `bulan`, `jumlah`, `sudah_bayar`, `sisa_tagihan`, `keterangan`, `tahun_ajaran`) VALUES
-(1, 133040254, 3, '2018-10-03', '', 50000, 25000, 25000, '', '');
+INSERT INTO `transaksi` (`id_transaksi`, `nis`, `nama_lengkap`, `jenis_biaya`, `jumlah`, `tanggal_bayar`, `bulan`, `sisa_tagihan`, `sudah_bayar`, `keterangan`, `tahun_ajaran`) VALUES
+(1, 133040287, '', 12, 0, '2018-11-06', '', 0, 100000, '', ''),
+(2, 133040287, '', 12, 0, '2018-11-06', '', 0, 885001, '', ''),
+(3, 133040287, '', 15, 0, '2018-11-06', '', 0, 24000, 'kurang 100', ''),
+(4, 133040345, '', 19, 0, '2018-11-06', '', 0, 50000, '', '2017/2018'),
+(5, 133040287, '', 15, 0, '2018-11-06', '', 0, 1000, '', ''),
+(6, 133040287, '', 14, 0, '2018-11-06', '', 0, 140000, '', '2017/2018'),
+(7, 133040287, '', 12, 0, '2018-11-06', 'September', 0, 985001, '', '2017/2018'),
+(8, 133040288, '', 12, 0, '2018-11-06', 'Juni', 0, 50000, '', '2017/2018');
 
 -- --------------------------------------------------------
 
@@ -128,17 +137,31 @@ INSERT INTO `transaksi` (`id_transaksi`, `nis`, `jenis_biaya`, `tanggal_bayar`, 
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `hak_akses` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`username`, `password`) VALUES
-('admin', 'admin'),
-('admin', 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `hak_akses`) VALUES
+(1, 'admin', 'admin', 'admin'),
+(2, 'walimurid', 'walimurid', 'walimurid');
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`),
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`jenis_biaya`) REFERENCES `biaya` (`idbiaya`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
