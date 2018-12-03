@@ -7,8 +7,6 @@
     <!-- Main content -->
   <section class="content">  
        <!-- Your code -->
-		
-
     <div class="box box-primary">
 	   <div class="box-body">
         <a href='<?php echo base_url("index.php/biaya/tambah"); ?>'class="btn btn-info btn-md">Tambah Data Biaya</a><br><br>
@@ -22,9 +20,8 @@
             <th width="15%">Aksi</th>
              </tr>
         </thead>
-
-      
       </tbody>
+
        <?php
        if( ! empty($biaya)){ // Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada
         $i=1;
@@ -38,8 +35,8 @@
 
           <td>
           <div class='btn-group'>
-          <td><button onclick=".'"'."openmodalBiaya('#ubahbiaya','".$data->jumlah."','".$data->jenis_biaya."','".$data->idbiaya."')".'"'." >Ubah</button></td>
-          <td><a href='".base_url("index.php/biaya/hapus/".$data->idbiaya)."'>Hapus</a></td>
+          <td><button class='btn btn-info' onclick=".'"'."openmodalBiaya('#ubahbiaya','".$data->jumlah."','".$data->jenis_biaya."','".$data->idbiaya."')".'"'." >Ubah</button></td>
+          <td><a class='btn btn-danger' href='".base_url("index.php/biaya/hapus/".$data->idbiaya)."'>Hapus</a></td>
           </td>
           </tr>";
         $i++;

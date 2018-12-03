@@ -43,7 +43,7 @@
         
         <td>
         <div class='btn-group'>
-        <button class='btn btn-primary' onclick=".'"'."openmodalSiswa('#ubahsiswa','".$data->nis."','".$data->nama_lengkap."','".$data->tmpt_lahir."','".$data->jenis_kel."','".$data->kelas."','".$data->alamat."','".$data->nama_ayah."','".$data->nama_ibu."','".$data->pekerjaan_ayah."','".$data->pekerjaan_ibu."','".$data->no_telp."','".$data->tahun_ajaran."')".'"'." >Ubah</button> <a class='btn btn-default' href='".base_url("index.php/siswa/hapus/".$data->nis)."'>Hapus</a></div>
+        <button class='btn btn-info' onclick=".'"'."openmodalSiswa('#ubahsiswa','".$data->nis."','".$data->nama_lengkap."','".$data->tmpt_lahir."','".$data->jenis_kel."','".$data->kelas."','".$data->alamat."','".$data->nama_ayah."','".$data->nama_ibu."','".$data->pekerjaan_ayah."','".$data->pekerjaan_ibu."','".$data->no_telp."','".$data->tahun_ajaran."')".'"'." >Ubah</button> <a class='btn btn-danger' href='".base_url("index.php/siswa/hapus/".$data->nis)."'>Hapus</a></div>
         <a class='btn btn-default' href='".base_url("index.php/siswa/".$data->nis)."'>detail</a></div>
         </td>
         </tr>";

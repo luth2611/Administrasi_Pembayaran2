@@ -76,7 +76,7 @@
               <td>Bulan</td>
               <td><select class="col-lg-4 form-control" name="bulan_bayar" id="bulan-bayar" disabled>
                       <option value=''>Pilih Bulan</option>
-                    <?php $bulan = array('Januari','Pebruari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','Nopember','Desember'); 
+                    <?php $bulan = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'); 
                       foreach($bulan as $data){
                         echo "<option value=".$data.">".$data."</option>";
                       }
@@ -108,7 +108,7 @@
                 <a class="nav-link active" id="perbulan-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Perbulan</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">insidentil</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Insidentil</a>
               </li>
           </ul>
           <div class="tab-content" id="myTabContent">
