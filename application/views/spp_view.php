@@ -34,7 +34,7 @@
           <td>".$data->alamat."</td>
                   <td>
                   <button onclick=".'"'."openmodalBayar('#bayar','".$data->nis."')".'"'." class='btn btn-info'>Bayar</button>
-                  <a href='".base_url()."index.php/Transaksi/cetak_pembayaran/' class= 'btn btn-default' >Cetak<Cetak/a>
+                  <a href='".base_url()."index.php/Transaksi/cetak_pembayaran/' class= 'btn btn-default' >Kirim SMS</a>
                   </td>
 
                 </tr>

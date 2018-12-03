@@ -147,8 +147,11 @@ class Transaksi extends CI_Controller {
 
 	public function cetak_pembayaran($nis){
 		$this->load->model('M_transaksi');
-		$data['trs'] = $this->M_transaksi->getTransaksi($nis)->result();
-		$this->load->view('cetakBayar',$data);
+		$data['DestinationNumber'] = '+6285720768168';
+		$data['TextRecorder'] = 'Anda mendapat informasi spp terkini';
+		$data['CreatorID'] = 'Gammu';
+		 $this->M_transaksi->sendSMS('outbox',$data);
+		// $this->load->view('cetakBayar',$data);
 	}
 
 }

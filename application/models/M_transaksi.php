@@ -155,4 +155,8 @@ class M_transaksi extends CI_Model{
 	
 	}
 
+	public function sendSMS($table,$data){
+		$this->db->insert($table,$data);
+	}
+
 }
