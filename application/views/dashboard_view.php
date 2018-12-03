@@ -1,5 +1,5 @@
 <section class="content-header">
-  <h1>Aplikasi Pembayaran Sekolah</h1>
+  <h1>Halaman Utama</h1>
   <ol class="breadcrumb">
     <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-sign-out"></i>Logout</a></li>
   </ol>
@@ -18,11 +18,7 @@
                 margin-right: auto; display:block;">
 
 
-                <style type="text/css">
-                body { font-family: Calibri, Helvetica, Arial, sans-serif; }
-                h3 { font-family: Cambria,"Times New Roman",serif; }
-
-                </style>
+        
                 
                 <h4>SELAMAT DATANG ADMIN!</h4> 
                 <p><h4>HALAMAN UTAMA APLIKASI PENGELOLAAN PEMBAYARAN </h4></p>

@@ -91,7 +91,7 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="<?php echo base_url() ?>assets/AdminLTE/#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<?php echo base_url() ?>assets/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url() ?>assets/AdminLTE/dist/img/avatar2.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Admin</span>
             </a>
@@ -121,10 +121,10 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url() ?>assets/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url() ?>assets/AdminLTE/dist/img/avatar2.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p>Administrator</p>
           <!-- Status -->
           <a href="<?php echo base_url() ?>assets/AdminLTE/#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -135,7 +135,7 @@ desired effect
         
         <!-- Optionally, you can add icons to the links -->
         <li class="treeview">
-          <a href="<?php echo base_url() ?>assets/AdminLTE/#"><i class="fa fa-link"></i> <span>Data Master</span>
+          <a href="<?php echo base_url() ?>assets/AdminLTE/#"><i class="fa fa-database"></i> <span>Data Master</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

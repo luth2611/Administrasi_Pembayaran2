@@ -76,7 +76,7 @@
               <td>Bulan</td>
               <td><select class="col-lg-4 form-control" name="bulan_bayar" id="bulan-bayar" disabled>
                       <option value=''>Pilih Bulan</option>
-                    <?php $bulan = array('Januari','Pebruari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','Nopember','Desember'); 
+                    <?php $bulan = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'); 
                       foreach($bulan as $data){
                         echo "<option value=".$data.">".$data."</option>";
                       }
