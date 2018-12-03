@@ -87,9 +87,9 @@
             </tr>
             <tr>
               <td>Tanggungan</td>
-              <td><input class="form-control" type="number" placeholder="Jumlah yang harus dibayar"  id="tanggungan"  readonly></td>
+              <td><input class="form-control" type="text" placeholder="Jumlah yang harus dibayar"  id="tanggungan"  readonly></td>
               <td>Sisa Bayar</td>
-              <td><input type='text' id='sisa-bayar' placeholder="Sisa yang harus dibayarkan" class='form-control' readonly></td>            
+              <td><input type='text' id='sisa-bayar' onchange="convertToRupiah(this)" onkeyup="formatRupiah(this)"placeholder="Sisa yang harus dibayarkan" class='form-control' readonly></td>            
             </tr> 
             <tr>
               <td>Jumlah Bayar</td>
@@ -112,7 +112,7 @@
               </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
             <table id="tabel-bayar-transaksi-perbulan" class="table table-bordered table-hover table-responsives">
         <thead>
           <tr>

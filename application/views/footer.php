@@ -106,7 +106,10 @@
       {"data":"nis"},
       {"data":"nama_lengkap"},
       {"data":"jenis_biaya"},
-      {"data":"sudah_bayar"},
+      {"data":"sudah_bayar",render:function(data,type,row){
+        var biaya = format_currency(parseInt(data),'Rp.');
+        return biaya;
+      }},
       {"data":"sudah_bayar",
         render:function(data,type,row){
           var i = 0
@@ -114,7 +117,7 @@
           if(i == 0){
             return "Lunas";
           }else{
-            return i;
+            return format_currency(parseInt(i),'Rp.');
           }
       }},
       {"data":"bulan"},
@@ -129,12 +132,12 @@
         }
       }},
       {"data":"id_transaksi",render:function(data,type,row){
-        var i = 0
-        i = row['jumlah'] - row['sudah_bayar'];
-        if(i == 0){
+        var temp = 0
+        temp = row['jumlah'] - row['sudah_bayar'];
+        if(temp == 0){
           return "";          
         }else{
-          return "<button class='btn btn-primary'>Bayar</button>";          
+          return "<a href='#jenis-biaya-bayar' onclick='bayarPerbulan("+row['idbiaya']+","+'"'+row['bulan']+'"'+","+row['jumlah']+","+temp+","+'"'+row['tahun_ajaran']+'"'+")'  class='btn btn-primary'>Bayar</a>";          
         }
         
       }}
@@ -160,7 +163,10 @@
       {"data":"nis"},
       {"data":"nama_lengkap"},
       {"data":"jenis_biaya"},
-      {"data":"sudah_bayar"},
+      {"data":"sudah_bayar",render:function(data,type,row){
+            var biaya = format_currency(parseInt(data),'Rp.');
+            return biaya;
+      }},
       {"data":"sudah_bayar",
         render:function(data,type,row){
           var i = 0
@@ -168,7 +174,7 @@
           if(i == 0){
             return "Lunas";
           }else{
-            return i;
+            return format_currency(parseInt(i),'Rp.');
           }
       }},
       {"data":"tahun_ajaran"},
@@ -182,12 +188,12 @@
         }
       }},
       {"data":"id_transaksi",render:function(data,type,row){
-        var i = 0
-        i = row['jumlah'] - row['sudah_bayar'];
-        if(i == 0){
+        var temp = 0
+        temp = row['jumlah'] - row['sudah_bayar'];
+        if(temp == 0){
           return "";          
         }else{
-          return "<button class='btn btn-primary'>Bayar</button>";          
+          return "<a href='#jenis-biaya-bayar' onclick='bayarInsidentil("+row['idbiaya']+","+row['jumlah']+","+temp+","+'"'+row['tahun_ajaran']+'"'+")'  class='btn btn-primary'>Bayar</a>";          
         }
         
       }}
@@ -196,26 +202,88 @@
 
     $(target).modal('show');    
   }
+</script>
+<script>
+function bayarPerbulan(idBiaya,bulan,tanggungan,sisaBayar,tahunAjaran){
+  $('#jenis-biaya-bayar').val(idBiaya);
+  $('#bulan-bayar').val(bulan);
+  $('#tanggungan').val(format_currency(parseInt(tanggungan),'Rp.'));
+  $('#sisa-bayar').val(format_currency(parseInt(sisaBayar),'Rp.'));
+  $('#tahun-ajaran').val(tahunAjaran);
+  $('#bulan-bayar').removeAttr('disabled');
+  $('#jumlah-bayar').removeAttr('disabled');
+  $('#tahun-ajaran').removeAttr('disabled');
+  $('#btn-submit').removeAttr('disabled');  
+  
+ 
 
+}
+function bayarInsidentil(idBiaya,tanggungan,sisaBayar,tahunAjaran){
+  $('#jenis-biaya-bayar').val(idBiaya);
+  $('#tanggungan').val(format_currency(parseInt(tanggungan),'Rp.'));
+  $('#sisa-bayar').val(format_currency(parseInt(sisaBayar),'Rp.'));
+  $('#tahun-ajaran').val(tahunAjaran);
+  $('#bulan-bayar').val('');  
+  $('#bulan-bayar').attr('disabled','disabled');
+  $('#jumlah-bayar').removeAttr('disabled');
+  $('#tahun-ajaran').removeAttr('disabled');
+  $('#btn-submit').removeAttr('disabled');  
+ 
+
+}
+</script>
+<script>
+function format_currency(n, currency) {
+  return currency + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+}
+</script>
+<script>
+ function formatRupiah(objek){
+        separator = "."; 
+		a = objek.value; 
+		b = a.replace(/[^\d]/g,""); 
+		c = ""; 
+		panjang = b.length; 
+		j = 0; 
+		for (i = panjang; i > 0; i--) { 
+			j = j + 1;
+			if (((j % 3) == 1) && (j != 1)) { 
+				c = b.substr(i-1,1) + separator + c; 
+			} else { 
+				c = b.substr(i-1,1) + c; 
+			} 
+		} 
+	  objek.value = c; 
+		
+	}
+  
+  function convertToRupiah(angka)
+{
+	var rupiah = '';		
+	var angkarev = angka.toString().split('').reverse().join('');
+	for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+	return rupiah.split('',rupiah.length-1).reverse().join('');
+}
 
 </script>
 <script>
   var baseUrl = $('#base-url').val();
   var i = 0;
   // var tanggungan = null;
+
   $('#jenis-biaya-bayar').on('change',function(){
-    var nis = $('#nis-bayar').val();
+      var nis = $('#nis-bayar').val();
     var idBiaya =  $('#jenis-biaya-bayar').val();
-   
     if(idBiaya == 12 || idBiaya == 16){
       $('#bulan-bayar').removeAttr('disabled');
     }else{
       $('#bulan-bayar').attr('disabled','disabled');
+      $('#bulan-bayar').val('');
     }
     $.ajax({url:baseUrl+'Transaksi/getJumlahJenisBiaya/'+idBiaya,success:function(res){
       res = JSON.parse(res);
      $.each(res,function(i,v){
-      $('#tanggungan').val(v.jumlah);
+      $('#tanggungan').val(format_currency(parseInt(v.jumlah),'Rp.'));
      });
     }});
     $.ajax({url:baseUrl+'Transaksi/getSisaBayar/'+ nis +'/'+idBiaya,success:function(res){
@@ -223,15 +291,34 @@
      $.each(res,function(i,v){
         if(v.sisa_bayar == 0){
           if(idBiaya == 12 || idBiaya == 16){
-            $('#sisa-bayar').val(v.jumlah);          
+            $('#sisa-bayar').val(format_currency(parseInt(v.jumlah),'Rp.'));   
+            $('#tahun-ajaran').val('');
+            $('#jumlah-bayar').removeAttr('disabled');
+            $('#tahun-ajaran').removeAttr('disabled');
+            $('#btn-submit').removeAttr('disabled');         
           }else{
             $('#sisa-bayar').val('Lunas');
-
+            $('#tahun-ajaran').val('');
+            $('#jumlah-bayar').attr('disabled','disabled');
+            $('#tahun-ajaran').attr('disabled','disabled');
+            $('#btn-submit').attr('disabled','disabled');
           }
         }else if(v.sisa_bayar == null){
-          $('#sisa-bayar').val(v.jumlah);
+          $('#sisa-bayar').val(format_currency(parseInt(v.jumlah),'Rp.'));
+          $('#tahun-ajaran').val('');
+          $('#jumlah-bayar').removeAttr('disabled');
+          $('#tahun-ajaran').removeAttr('disabled');
+          $('#btn-submit').removeAttr('disabled');  
         }else{
-          $('#sisa-bayar').val(v.sisa_bayar);
+          if(v.sisa_bayar <= 0){
+          $('#sisa-bayar').val(format_currency(parseInt(v.jumlah),'Rp.'));
+          }else{
+            $('#sisa-bayar').val(format_currency(parseInt(v.sisa_bayar),'Rp.'));
+          }
+          $('#tahun-ajaran').val('');
+          $('#jumlah-bayar').removeAttr('disabled');
+          $('#tahun-ajaran').removeAttr('disabled');
+          $('#btn-submit').removeAttr('disabled');  
         }
      });
     }});
@@ -273,11 +360,20 @@
       res = JSON.parse(res);
      $.each(res,function(i,v){
         if(v.sisa_bayar == null){
-          $('#sisa-bayar').val(v.jumlah);
+          $('#sisa-bayar').val(format_currency(parseInt(v.jumlah),'Rp.'));
+          $('#jumlah-bayar').removeAttr('disabled');
+          $('#tahun-ajaran').removeAttr('disabled');
+          $('#btn-submit').removeAttr('disabled');        
         }else if(v.sisa_bayar == 0){
           $('#sisa-bayar').val('Lunas');
+          $('#jumlah-bayar').attr('disabled','disabled');
+          $('#tahun-ajaran').attr('disabled','disabled');
+          $('#btn-submit').attr('disabled','disabled');
         }else{
-          $('#sisa-bayar').val(v.sisa_bayar);
+          $('#sisa-bayar').val(format_currency(parseInt(v.sisa_bayar),'Rp.'));
+          $('#jumlah-bayar').removeAttr('disabled');
+          $('#tahun-ajaran').removeAttr('disabled');
+          $('#btn-submit').removeAttr('disabled');  
         }
      });
     }});
