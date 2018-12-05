@@ -42,7 +42,7 @@ class Transaksi extends CI_Controller {
 		$data['nis'] = $this->input->post('nis_bayar');
 		$data['jenis_biaya'] = $this->input->post('jenis_biaya_bayar');
 		$data['tanggal_bayar'] = date('Y-m-d');
-		if($data['jenis_biaya'] == 12 || $data['jenis_biaya'] == 16){
+		if(!empty($this->input->post('bulan_bayar'))){
 			$data['bulan'] = $this->input->post('bulan_bayar');
 		}
 		$data['sudah_bayar'] = $this->input->post('jumlah_bayar');
@@ -56,6 +56,12 @@ class Transaksi extends CI_Controller {
 	public function getJumlahJenisBiaya($idBiaya){
 		$this->load->model('M_transaksi');
 		$biaya = $this->M_transaksi->getData('biaya','*',array('idbiaya'=>$idBiaya))->result();
+		echo json_encode($biaya);
+	}
+
+	public function cekBiaya($idBiaya){
+		$this->load->model('M_transaksi');
+		$biaya = $this->M_transaksi->getData('biaya','status',array('idbiaya'=>$idBiaya))->result_array();
 		echo json_encode($biaya);
 	}
 
@@ -146,12 +152,40 @@ class Transaksi extends CI_Controller {
 	}
 
 	public function cetak_pembayaran($nis){
+		$this->load->library('m_pdf');
 		$this->load->model('M_transaksi');
-		$data['DestinationNumber'] = '+6285720768168';
-		$data['TextRecorder'] = 'Anda mendapat informasi spp terkini';
-		$data['CreatorID'] = 'Gammu';
-		 $this->M_transaksi->sendSMS('outbox',$data);
-		// $this->load->view('cetakBayar',$data);
+		$data['siswa'] = $this->M_transaksi->getData('siswa','*',array('nis'=>$nis))->result_array();
+		$data['trs_insidentil'] = $this->M_transaksi->getTransaksiInsidentil($nis)->result_array();
+		$data['biaya_bulanan'] = $this->M_transaksi->getData('biaya','idbiaya,jenis_biaya,jumlah,status',array('status'=>'2'))->result_array();		
+		for($i = 0; $i < count($data['biaya_bulanan']); $i++){
+			$trs_perbulan = $this->M_transaksi->getTransaksiPerbulanForLaporan($nis,$data['biaya_bulanan'][$i]['idbiaya'])->result_array();
+			$data['biaya_bulanan'][$i]['trs_perbulan'] = $trs_perbulan;
+		}
+	
+		//this data will be passed on to the view
+		$data['data']=$this->input->post(null, true);
+		//load the view, pass the variable and do not show it but "save" the output into $html variable
+		$html=$this->load->view('cetakBayar', $data, true);
+		//this the the PDF filename that user will get to download
+		$pdfFilePath = "the_pdf_output.pdf";
+		//load mPDF library
+		$this->load->library('m_pdf');
+		//actually, you can pass mPDF parameter on this load() function
+		$pdf = $this->m_pdf->load();
+		//generate the PDF!
+		$pdf->WriteHTML($html);
+		//offer it to user via browser download! (The PDF won't be saved on your server HDD)
+		$pdf->Output($pdfFilePath, "I");
+		// echo var_dump($data['biaya_bulanan']);
+		$this->load->view('cetakBayar');
+	}
+	public function sendSMS(){
+		// $this->load->model('M_transaksi');
+		// $data['DestinationNumber'] = '+6285720768168';
+		// $data['TextRecorder'] = 'Anda mendapat informasi spp terkini';
+		// $data['CreatorID'] = 'Gammu';
+		//  $this->M_transaksi->sendSMS('outbox',$data);
+		
 	}
 
 }

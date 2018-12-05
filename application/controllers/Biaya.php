@@ -29,23 +29,25 @@ class Biaya extends CI_Controller {
 	}
 
 	public function tambah(){
-    if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
-      if($this->BiayaModel->validation("save")){ // Jika validasi sukses atau hasil validasi adalah TRUE
-        $this->BiayaModel->save(); // Panggil fungsi save() yang ada di SiswaModel.php
+    // if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
+      // if($this->BiayaModel->validation("save")){ // Jika validasi sukses atau hasil validasi adalah TRUE
+         // Panggil fungsi save() yang ada di SiswaModel.php
+        $this->BiayaModel->save($this->input->post(null,true));
         redirect('biaya/list_biaya');
-      }
-    }
-    $this->load->view('header.php');
-    $this->load->view('add_biaya');
-    $this->load->view('footer.php');
+      // }
+    // }
+    // $this->load->view('header.php');
+    // $this->load->view('add_biaya');
+    // $this->load->view('footer.php');
   }
 
   public function ubah(){
     // if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
       // if($this->BiayaModel->validation("update")){ // Jika validasi sukses atau hasil validasi adalah TRUE
-      $data['jumlah'] = $this->input->post('jumlah_ubah');
-      $data['jenis_biaya'] = $this->input->post('jenis_biaya_ubah');
-      $id = $this->input->post('id_ubah');
+      // $data['jumlah'] = $this->input->post('jumlah_ubah');
+      // $data['jenis_biaya'] = $this->input->post('jenis_biaya_ubah');
+      $id = $this->input->post('idbiaya');
+      $data = $this->input->post(null,true);
         $this->BiayaModel->edit($data,array('idbiaya'=>$id)); // Panggil fungsi edit() yang ada di SiswaModel.php
         redirect('biaya/list_biaya');
       // }

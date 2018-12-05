@@ -33,15 +33,12 @@ class Siswa extends CI_Controller {
 	}
 
 	public function tambah(){
-    if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
-      if($this->SiswaModel->validation("save")){ // Jika validasi sukses atau hasil validasi adalah TRUE
-        $this->SiswaModel->save(); // Panggil fungsi save() yang ada di SiswaModel.php
+    // if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
+      // if($this->SiswaModel->validation("save")){ // Jika validasi sukses atau hasil validasi adalah TRUE
+         // Panggil fungsi save() yang ada di SiswaModel.php
+
+        $this->SiswaModel->save($this->input->post(null,true));
         redirect('siswa/list_siswa');
-      }
-    }
-    $this->load->view('header.php');
-    $this->load->view('add_siswa');
-    $this->load->view('footer.php');
   }
 
   // public function ubah($nis){
@@ -59,7 +56,7 @@ class Siswa extends CI_Controller {
   // }
 
 	public function hapus($nis){
-    $this->SiswaModel->delete($nis); // Panggil fungsi delete() yang ada di SiswaModel.php
+    $query = $this->SiswaModel->delete($nis); // Panggil fungsi delete() yang ada di SiswaModel.php
     redirect('siswa/list_siswa');
   }	
 
@@ -73,7 +70,7 @@ class Siswa extends CI_Controller {
     // if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
       // if($this->BiayaModel->validation("update")){ // Jika validasi sukses atau hasil validasi adalah TRUE
       $data['nama_lengkap'] = $this->input->post('nama_lengkap_ubah');
-      $data['tmpt_lahir'] = $this->input->post('tmpt_lahir_ubah');
+      $data['tgl_lahir'] = $this->input->post('tgl_lahir_ubah');
       $data['jenis_kel'] = $this->input->post('jenis_kel_ubah');
       $data['kelas'] = $this->input->post('kelas_ubah');
       $data['alamat'] = $this->input->post('alamat_ubah');
@@ -83,8 +80,8 @@ class Siswa extends CI_Controller {
       $data['pekerjaan_ibu'] = $this->input->post('pekerjaan_ibu_ubah');
       $data['no_telp'] = $this->input->post('no_telp_ubah');
       $data['tahun_ajaran'] = $this->input->post('tahun_ajaran_ubah');
-      $id = $this->input->post('nis');
-        $this->SiswaModel->edit($data,array('nis'=>$nis)); // Panggil fungsi edit() yang ada di SiswaModel.php
+      $nis = $this->input->post('nis');
+        $this->SiswaModel->edit($this->input->post(null,true),array('nis'=>$nis)); // Panggil fungsi edit() yang ada di SiswaModel.php
         redirect('siswa/list_siswa');
       // }
     // }

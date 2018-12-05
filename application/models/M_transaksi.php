@@ -25,7 +25,18 @@ class M_transaksi extends CI_Model{
 		and biaya.status = 2
 		group by transaksi.bulan, biaya.idbiaya';
 		return $this->db->query($query);
-
+	}
+	public function getTransaksiPerbulanForLaporan($nis,$idbiaya){
+		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran,transaksi.bulan 
+		FROM `siswa`,transaksi,biaya
+		where transaksi.nis = siswa.nis
+		and transaksi.jenis_biaya = biaya.idbiaya
+		and siswa.nis = '.$nis.'
+		and biaya.idbiaya = '.$idbiaya.'
+		and biaya.status = 2
+		group by transaksi.bulan, biaya.idbiaya
+		order by transaksi.bulan desc';
+		return $this->db->query($query);
 	}
 	public function getTransaksiInsidentil($nis){
 		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran 

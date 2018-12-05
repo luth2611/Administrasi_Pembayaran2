@@ -15,11 +15,11 @@
     <table id="myTable" class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>NIS</th>
-        <th>Nama</th>
-        <th>Kelas</th>
-        <th>Alamat</th>
-        <th>Aksi</th>
+        <th style='text-align:center'>NIS</th>
+        <th style='text-align:center'>Nama</th>
+        <th style='text-align:center'>Kelas</th>
+        <th style='text-align:center'>Alamat</th>
+        <th style='text-align:center'>Aksi</th>
       </tr>
       </thead>
       <tbody>
@@ -33,8 +33,8 @@
           <td>".$data->kelas."</td>
           <td>".$data->alamat."</td>
                   <td>
-                  <button onclick=".'"'."openmodalBayar('#bayar','".$data->nis."')".'"'." class='btn btn-info'>Bayar</button>
-                  <a href='".base_url()."index.php/Transaksi/cetak_pembayaran/' class= 'btn btn-default' >Kirim SMS</a>
+                  <button onclick=".'"'."openmodalBayar('#bayar','".$data->nis."')".'"'." class='btn btn-info btn-sm'>Bayar</button>
+                  <a href='".base_url()."index.php/Transaksi/cetak_pembayaran/".$data->nis."' class= 'btn btn-default btn-sm' >Cetak Pembayaran</a>
                   </td>
 
                 </tr>

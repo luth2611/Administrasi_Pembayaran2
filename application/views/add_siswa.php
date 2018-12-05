@@ -33,8 +33,12 @@
         <tr>
           <td>Jenis Kelamin</td>
           <td>
-          <input  type="radio" name="input_jeniskelamin" value="Laki-laki" <?php echo set_radio('jeniskelamin', 'Laki-laki'); ?>> Laki-laki
-          <input  type="radio" name="input_jeniskelamin" value="Perempuan" <?php echo set_radio('jeniskelamin', 'Perempuan'); ?>> Perempuan
+          <select class='form-control' name='input_jeniskelamin'>
+              <option value="Laki - Laki">Laki - Laki</option>
+              <option value="Perempuan">Perempuan</option>      
+          </select>
+          <!-- <input  class='form-control' type="radio" name="input_jeniskelamin" value="Laki-laki" >  -->
+          <!-- <input class='form-control'  type="radio" name="input_jeniskelamin" value="Perempuan" >  -->
           </td>
         </tr>
         <tr>

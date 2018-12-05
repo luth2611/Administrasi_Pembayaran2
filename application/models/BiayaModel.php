@@ -33,12 +33,7 @@ class BiayaModel extends CI_Model {
   }
   
   // Fungsi untuk melakukan simpan data ke tabel siswa
-  public function save(){
-    $data = array(
-      "jenis_biaya" => $this->input->post('input_jenis_biaya'),
-      "jumlah" => $this->input->post('input_Jumlah')
-    
-    );
+  public function save($data){
     
     $this->db->insert('biaya', $data); // Untuk mengeksekusi perintah insert data
   }

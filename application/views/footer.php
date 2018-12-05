@@ -59,16 +59,18 @@
     });
   } );
   
-  function openmodalBiaya (target,jumlah,jenis,id){ 
+  function openmodalBiaya (target,jumlah,jenis,status,id){ 
     $('#jumlah').val(jumlah);
     $('#jenis-biaya-ubah').val(jenis);
+    $('#status-ubah').val(status);
     $('#id-ubah').val(id);
     $(target).modal('show');
   }
 
-  function openmodalSiswa(target,nis,nama_lengkap,jenis_kel,kelas,alamat,nama_ayah,nama_ibu,pekerjaan_ayah,pekerjaan_ibu,no_telp,tahun_ajaran,ubah_biaya = null){
-    $('#nis').val(nis);
+  function openmodalSiswa(target,nis,nama_lengkap,tgl_lahir,jenis_kel,kelas,alamat,nama_ayah,nama_ibu,pekerjaan_ayah,pekerjaan_ibu,no_telp,tahun_ajaran,ubah_biaya = null){
+    $('#nis-ubah').val(nis);
     $('#nama-lengkap-ubah').val(nama_lengkap);
+    $('#tgl-lahir-ubah').val(tgl_lahir);
     $('#jenis-kel-ubah').val(jenis_kel);
     $('#kelas-ubah').val(kelas);
     $('#alamat-ubah').val(alamat);
@@ -115,7 +117,7 @@
           var i = 0
           i = row['jumlah'] - data;
           if(i == 0){
-            return "Lunas";
+            return "Rp.0";
           }else{
             return format_currency(parseInt(i),'Rp.');
           }
@@ -126,9 +128,9 @@
         var i = 0
         i = row['jumlah'] - data;
         if(i == 0){
-          return '<span class="badge badge-success">Lunas</span>'
+          return '<span class="badge btn-success">Lunas</span>'
         }else{
-          return '<span class="badge badge-danger">Belum Lunas</span>'
+          return '<span class="badge btn-danger">Belum Lunas</span>'
         }
       }},
       {"data":"id_transaksi",render:function(data,type,row){
@@ -172,7 +174,7 @@
           var i = 0
           i = row['jumlah'] - data;
           if(i == 0){
-            return "Lunas";
+            return "Rp.0";
           }else{
             return format_currency(parseInt(i),'Rp.');
           }
@@ -182,9 +184,9 @@
         var i = 0
         i = row['jumlah'] - data;
         if(i == 0){
-          return '<span class="badge badge-success">Lunas</span>'
+          return '<span class="badge btn-success">Lunas</span>'
         }else{
-          return '<span class="badge badge-danger">Belum Lunas</span>'
+          return '<span class="badge btn-danger">Belum Lunas</span>'
         }
       }},
       {"data":"id_transaksi",render:function(data,type,row){
@@ -274,7 +276,12 @@ function format_currency(n, currency) {
   $('#jenis-biaya-bayar').on('change',function(){
       var nis = $('#nis-bayar').val();
     var idBiaya =  $('#jenis-biaya-bayar').val();
-    if(idBiaya == 12 || idBiaya == 16){
+    var statusBiaya = 0;
+    // cek biaya apakah pertahun atau perbulan
+    $.ajax({url:baseUrl+'Transaksi/cekBiaya/'+idBiaya,success:function(res){
+      res = JSON.parse(res);
+      if(res[0]['status'] == 2 ){
+        statusBiaya = res[0]['status'];
       $('#bulan-bayar').removeAttr('disabled');
     }else{
       $('#bulan-bayar').attr('disabled','disabled');
@@ -290,7 +297,7 @@ function format_currency(n, currency) {
       res = JSON.parse(res);
      $.each(res,function(i,v){
         if(v.sisa_bayar == 0){
-          if(idBiaya == 12 || idBiaya == 16){
+          if(statusBiaya == 2){
             $('#sisa-bayar').val(format_currency(parseInt(v.jumlah),'Rp.'));   
             $('#tahun-ajaran').val('');
             $('#jumlah-bayar').removeAttr('disabled');
@@ -322,6 +329,7 @@ function format_currency(n, currency) {
         }
      });
     }});
+    }})
   });
 </script>
 <script>

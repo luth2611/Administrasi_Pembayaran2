@@ -36,42 +36,27 @@ class SiswaModel extends CI_Model {
   }
   
   // Fungsi untuk melakukan simpan data ke tabel siswa
-  public function save(){
-    $data = array(
-      "nis" => $this->input->post('input_nis'),
-      "nama_lengkap" => $this->input->post('input_nama'),
-      "tmpt_lahir" => $this->input->post('input_tmpt'),
-      "jenis_kel" => $this->input->post('input_jeniskelamin'),
-      "kelas" => $this->input->post('input_kelas'),
-      "alamat" => $this->input->post('input_alamat'),
-      "nama_ayah" => $this->input->post('input_ayah'),
-      "nama_ibu" => $this->input->post('input_ibu'),
-      "pekerjaan_ayah" => $this->input->post('input_pekerjaan_ayah'),
-      "pekerjaan_ibu" => $this->input->post('input_pekerjaan_ibu'),
-      "no_telp" => $this->input->post('input_telp'),
-      "tahun_ajaran" => $this->input->post('input_thn')
-    );
-    
+  public function save($data){
     $this->db->insert('siswa', $data); // Untuk mengeksekusi perintah insert data
   }
   
   // Fungsi untuk melakukan ubah data siswa berdasarkan NIS siswa
-  public function edit($nis){
-    $data = array(
-      "nama_lengkap" => $this->input->post('input_nama'),
-      "tmpt_lahir" => $this->input->post('input_tgl_lahir'),
-      "jenis_kel" => $this->input->post('input_jeniskelamin'),
-      "kelas" => $this->input->post('input_kelas'),
-      "alamat" => $this->input->post('input_alamat'),
-      "nama_ayah" => $this->input->post('input_ayah'),
-      "nama_ibu" => $this->input->post('input_ibu'),
-      "pekerjaan_ayah" => $this->input->post('input_pekerjaan_ayah'),
-      "pekerjaan_ibu" => $this->input->post('input_pekerjaan_ibu'),
-      "no_telp" => $this->input->post('input_telp'),
-      "tahun_ajaran" => $this->input->post('input_thn')
-    );
+  public function edit($data,$where){
+    // $data = array(
+    //   "nama_lengkap" => $this->input->post('input_nama'),
+    //   "tmpt_lahir" => $this->input->post('input_tgl_lahir'),
+    //   "jenis_kel" => $this->input->post('input_jeniskelamin'),
+    //   "kelas" => $this->input->post('input_kelas'),
+    //   "alamat" => $this->input->post('input_alamat'),
+    //   "nama_ayah" => $this->input->post('input_ayah'),
+    //   "nama_ibu" => $this->input->post('input_ibu'),
+    //   "pekerjaan_ayah" => $this->input->post('input_pekerjaan_ayah'),
+    //   "pekerjaan_ibu" => $this->input->post('input_pekerjaan_ibu'),
+    //   "no_telp" => $this->input->post('input_telp'),
+    //   "tahun_ajaran" => $this->input->post('input_thn')
+    // );
     
-    $this->db->where('nis', $nis);
+    $this->db->where($where);
     $this->db->update('siswa', $data); // Untuk mengeksekusi perintah update data
   }
   
@@ -79,6 +64,7 @@ class SiswaModel extends CI_Model {
   public function delete($nis){
     $this->db->where('nis', $nis);
     $this->db->delete('siswa'); // Untuk mengeksekusi perintah delete data
+    return '1';
   }
 
   public function getSiswa($select,$table,$where = null){

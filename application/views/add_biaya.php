@@ -19,11 +19,11 @@
       <table cellpadding="8" class="table table-bordered table-hover">
         <tr>
           <td>Jenis Biaya</td>
-          <td><input type="text" name="input_jenis_biaya" value="<?php echo set_value('input_jenis_biaya'); ?>"></td>
+          <td><input type="text" name="input_jenis_biaya"></td>
         </tr>
         <tr>
           <td>Jumlah</td>
-          <td><input type="text" name="input_Jumlah" value="<?php echo set_value('input_Jumlah'); ?>"></td>
+          <td><input type="text" name="input_Jumlah"></td>
         </tr>
         
         
