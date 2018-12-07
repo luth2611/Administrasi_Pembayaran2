@@ -179,13 +179,73 @@ class Transaksi extends CI_Controller {
 		// echo var_dump($data['biaya_bulanan']);
 		$this->load->view('cetakBayar');
 	}
-	public function sendSMS(){
-		// $this->load->model('M_transaksi');
-		// $data['DestinationNumber'] = '+6285720768168';
-		// $data['TextRecorder'] = 'Anda mendapat informasi spp terkini';
-		// $data['CreatorID'] = 'Gammu';
-		//  $this->M_transaksi->sendSMS('outbox',$data);
+	public function kelolaSmsTagihanInsidentil($nis){
+		$this->load->model('M_transaksi');
+		$pesan = '';
+		$where ='';
+		$idBiaya = [];
+		$no = 1;
+		$siswa = $this->M_transaksi->getData('siswa','*',array('nis'=>$nis))->result_array();
+		$trs_insidentil = $this->M_transaksi->getTransaksiInsidentil($nis)->result_array();
+		$pesan .= 'Yth. Kepada orang tua '.$siswa[0]['nama_lengkap'].' anda terdata menunggak pembayaran ';
+		for($i = 0; $i < count($trs_insidentil); $i++){
+			array_push($idBiaya,$trs_insidentil[$i]['idbiaya']);
+		}
+		for($j = 0;$j < count($idBiaya);$j++){
+			$where .= 'and idbiaya != '.$idBiaya[$j].' ';
+		}
+		$insidentilBelumBayar = $this->M_transaksi->getTrsInsidentilForSMS($where)->result_array();
+		$pesan .= '(insidentil) berupa ';
+		for($k = 0; $k < count($insidentilBelumBayar);$k++){
+			$pesan .= $no.'. '.$insidentilBelumBayar[$k]['jenis_biaya'].' ';
+			$no++;
+		}
+		$pesan .= ',harap untuk segera dibayarkan, terima kasih';
+		$this->sendSMS($pesan,$siswa[0]['no_telp']);
 		
+	}
+	public function sendSMS($pesan,$noTelp){
+		// $long_msg;
+		// $jumlah_pesan = 0;
+		// $urutan_pesan = '01';
+		// $random_number = '050003A7';	
+		// if (strlen($pesan) > 160){
+		// 	$long_msg = str_split($pesan,100);
+		// 	$jumlah_pesan = count($long_msg);
+		// 	if($jumlah_pesan < 10){
+		// 		$random_number .= '0'.$jumlah_pesan;
+		// 	}else{
+		// 		$random_number .= $jumlah_pesan;
+		// 	}
+		// 	$data['DestinationNumber'] = $noTelp;
+		// 	$data['TextDecoded'] = $long_msg[0];
+		// 	$data['CreatorID'] = 'Gammu';
+		// 	$data['UDH'] = $random_number.'01';
+		// 	$data['MultiPart'] = 'true';
+		// 	$id = $this->M_transaksi->sendSMS('outbox',$data);
+			
+		// 	for($i = 1; $i < $jumlah_pesan;$i++){
+		// 		$urutan_pesan = $urutan_pesan+1;
+		// 		if($urutan_pesan <10){
+		// 			$urutan_pesan = '0'.$urutan_pesan;
+		// 		}
+		// 		$datas['ID'] = $id;			
+		// 		$datas['SequencePosition'] = $urutan_pesan;			
+		// 		$datas['UDH'] = $random_number.$urutan_pesan;
+		// 		$datas['TextDecoded'] = $long_msg[$i];
+		// 		$this->M_transaksi->sendSMS('outbox_multipart',$datas);
+		// 	}
+			
+
+		// }else{
+			$data['DestinationNumber'] = $noTelp;
+			$data['TextDecoded'] = $pesan;
+			$data['CreatorID'] = 'Gammu';
+			$data['SendBefore'] = '23:59:00';
+
+			$this->M_transaksi->sendSMS('outbox',$data);
+			
+		// }
 	}
 
 }

@@ -157,6 +157,12 @@ class M_transaksi extends CI_Model{
 		return $query->result();
 	}
 
+	public function getTrsInsidentilForSMS($where){
+		$query = 'select jenis_biaya from biaya
+		where status = 1 '.$where;
+		return $this->db->query($query);
+	}
+
 	public function get_by_id($id)
 	{
 	  
@@ -168,6 +174,7 @@ class M_transaksi extends CI_Model{
 
 	public function sendSMS($table,$data){
 		$this->db->insert($table,$data);
+		return $this->db->insert_id();
 	}
 
 }
