@@ -1,2 +1,0 @@
-Wed 2018/10/31 13:49:36 gammu-smsd[8176]: No gammu configuration found (no [gammu] section in SMSD config file)!
-Wed 2018/10/31 13:49:40 gammu-smsd[6820]: No gammu configuration found (no [gammu] section in SMSD config file)!

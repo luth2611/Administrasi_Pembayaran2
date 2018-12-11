@@ -33,8 +33,8 @@
         }
         .kiri{
             float: left;
-            width: 120px;
-            height: 75px;
+            width: 80px;
+            height: 80px;
             padding-top: 10px;
 
 
@@ -156,8 +156,7 @@
     </div>
     <br>
         <div class="img">
-         <img class="kiri" src="<?php echo base_url() ;?>assets/image/pgri_bugis.jpg" "login-bg">
-         <img class="kanan" src="<?php echo base_url() ;?>assets/image/lam_indramayu.PNG" "login-bg">
+         <img class="kiri" src="<?php echo base_url() ;?>assets/image/persis.png" "login-bg">
          </div>
     <p class="kop">Jl. Bojongwaru 04/11 <br> Kec. Pameungpeuk Kab. Bandung Jawa Barat
     </p>
