@@ -39,6 +39,10 @@ class SiswaModel extends CI_Model {
   public function save($data){
     $this->db->insert('siswa', $data); // Untuk mengeksekusi perintah insert data
   }
+
+  public function insert($table,$data){
+    $this->db->insert($table,$data);
+  }
   
   // Fungsi untuk melakukan ubah data siswa berdasarkan NIS siswa
   public function edit($data,$where){

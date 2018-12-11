@@ -36,7 +36,11 @@ class Siswa extends CI_Controller {
     // if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
       // if($this->SiswaModel->validation("save")){ // Jika validasi sukses atau hasil validasi adalah TRUE
          // Panggil fungsi save() yang ada di SiswaModel.php
-
+        $noTelp = $this->input->post('no_telp');
+        $data['username'] = $noTelp;
+        $data['password'] = $noTelp;
+        $data['hak_akses'] = 'walimurid';
+        $this->SiswaModel->insert('user',$data);
         $this->SiswaModel->save($this->input->post(null,true));
         redirect('siswa/list_siswa');
   }

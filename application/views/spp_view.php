@@ -1,5 +1,5 @@
    <section class="content-header">   
-    <h1>Transaksi</h1>
+    <h1>Transaksi <a data-toggle='tooltip' title='Kirim SMS Tagihan ke semua wali murid' href='<?= site_url('Transaksi/controlSMS') ?>' class= 'btn btn-info btn-sm' >Kirim Pesan Tagihan</a></h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>verifylogin/logout/"><i class="fa fa-sign-out"></i>Logout</a></li>
       </ol>
@@ -76,7 +76,7 @@
               <td>Bulan</td>
               <td><select class="col-lg-4 form-control" name="bulan_bayar" id="bulan-bayar" disabled>
                       <option value=''>Pilih Bulan</option>
-                    <?php $bulan = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'); 
+                    <?php $bulan = array('January','February','March','April','May','June','July','August','September','October','November','December'); 
                       foreach($bulan as $data){
                         echo "<option value=".$data.">".$data."</option>";
                       }
@@ -114,36 +114,39 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
             <table id="tabel-bayar-transaksi-perbulan" class="table table-bordered table-hover table-responsives">
-        <thead>
-          <tr>
-            <th>NIS</th>
-            <th>Nama</th>
-            <th>Jenis Biaya</th>
-            <th>Sudah Bayar</th>
-            <th>Sisa Bayar</th>
-            <th>Bulan</th>
-            <th>Tahun Ajaran</th>
-            <th>Status</th>
-            <th>Aksi</th>
-          </tr>
-          </thead>
-        </table>
+              <thead>
+                <tr>
+                  <th>NIS</th>
+                  <th>Nama</th>
+                  <th>Jenis Biaya</th>
+                  <th>Sudah Bayar</th>
+                  <th>Sisa Bayar</th>
+                  <th>Bulan</th>
+                  <th>Tahun Ajaran</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <table id="tabel-bayar-transaksi-insidentil" class="table table-bordered table-hover table-responsives">
-        <thead>
-          <tr>
-            <th>NIS</th>
-            <th>Nama</th>
-            <th>Jenis Biaya</th>
-            <th>Sudah Bayar</th>
-            <th>Sisa Bayar</th>
-            <th>Tahun Ajaran</th>
-            <th>Status</th>
-            <th>Aksi</th>
-          </tr>
-          </thead>
-        </table>
+                <thead>
+                  <tr>
+                    <th>NIS</th>
+                    <th>Nama</th>
+                    <th>Jenis Biaya</th>
+                    <th>Sudah Bayar</th>
+                    <th>Sisa Bayar</th>
+                    <th>Tahun Ajaran</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
             </div>
           </div>
         

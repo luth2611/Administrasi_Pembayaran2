@@ -7,7 +7,7 @@ Class VerifyLogin extends CI_Controller{
     $this->load->model('user', '', TRUE);
   }
 
-  function index()
+  function cekLogin()
   {
     //This method will have the credentials validation
     $this->load->library('form_validation');
@@ -16,8 +16,11 @@ Class VerifyLogin extends CI_Controller{
 
     if($this->form_validation->run() == FALSE)
     {
-      //Field validation failed.  User redirected to login page
-      $this->load->view('login_view');
+      
+        //Field validation failed.  User redirected to login page
+        $this->load->view('login_view');
+    
+    
     }
     else
     {
@@ -32,6 +35,31 @@ Class VerifyLogin extends CI_Controller{
 
   }
 
+  // function verifyLoginWaliMurid()
+  // {
+  //   //This method will have the credentials validation
+  //   $this->load->library('form_validation');
+  //   $this->form_validation->set_rules('username', 'Username', 'trim|required');
+  //   $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
+
+  //   if($this->form_validation->run() == FALSE)
+  //   {
+  //     //Field validation failed.  User redirected to login page
+  //     $this->load->view('login_wali_murid');
+  //   }
+  //   else
+  //   {
+  //     //Go to private area
+  //     if($this->session->userdata('hak_akses') == "admin"){
+  //       redirect('dashboard', 'refresh');  
+  //     }else if($this->session->userdata('hak_akses') == "walimurid"){
+  //       redirect('walimurid', 'refresh');
+  //     }
+      
+  //   }
+
+  // }
+
   function check_database($password)
   {
     //Field validation succeeded.  Validate against database
@@ -42,13 +70,24 @@ Class VerifyLogin extends CI_Controller{
 
     if($result)
     {
+      
       $sess_array = array();
       foreach($result as $row)
       {
-        $sess_array = array(
-          'username' => $row->username,
-          'hak_akses' => $row->hak_akses
-        );
+        if($row->hak_akses == 'walimurid'){
+          $walimurid = $this->user->getData('*','siswa',array('no_telp'=>$username))->result_array();
+          $sess_array = array(
+            'username' => $row->username,
+            'hak_akses' => $row->hak_akses,
+            'nis' => $walimurid[0]['nis']
+          );
+        }else{
+          $sess_array = array(
+            'username' => $row->username,
+            'hak_akses' => $row->hak_akses
+          );
+        }
+       
         $this->session->set_userdata($sess_array);
       }
       return TRUE;
@@ -59,7 +98,7 @@ Class VerifyLogin extends CI_Controller{
       return false;
     }
   }
-
+  
   function logout()
   {
     $this->session->unset_userdata('logged_in');

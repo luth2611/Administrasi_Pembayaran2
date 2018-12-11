@@ -16,13 +16,18 @@ class M_transaksi extends CI_Model{
 		return true;
 	}
 
-	public function getTransaksiPerbulan($nis){
+	public function getTransaksiPerbulan($nis,$bulan = null){
+		$where = '';
+		if($bulan != null){
+			$where = 'and bulan != "'.$bulan.'"';
+		}
 		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran,transaksi.bulan 
 		FROM `siswa`,transaksi,biaya
 		where transaksi.nis = siswa.nis
 		and transaksi.jenis_biaya = biaya.idbiaya
 		and siswa.nis = '.$nis.'
 		and biaya.status = 2
+		'.$where.'
 		group by transaksi.bulan, biaya.idbiaya';
 		return $this->db->query($query);
 	}
@@ -160,6 +165,19 @@ class M_transaksi extends CI_Model{
 	public function getTrsInsidentilForSMS($where){
 		$query = 'select jenis_biaya from biaya
 		where status = 1 '.$where;
+		return $this->db->query($query);
+	}
+
+	public function getTrsPerbulanForSMS($nis,$idbiaya,$bulan){
+		$query = 'SELECT siswa.nis,siswa.nama_lengkap,biaya.idbiaya,biaya.jenis_biaya,biaya.jumlah,transaksi.id_transaksi,sum(transaksi.sudah_bayar) as sudah_bayar,transaksi.tahun_ajaran,transaksi.bulan 
+		FROM `siswa`,transaksi,biaya
+		where transaksi.nis = siswa.nis
+		and transaksi.jenis_biaya = biaya.idbiaya
+		and siswa.nis = '.$nis.'
+		and biaya.status = 2
+		and biaya.idbiaya = '.$idbiaya.'
+		and transaksi.bulan = "'.$bulan.'"
+		group by transaksi.bulan, biaya.idbiaya';
 		return $this->db->query($query);
 	}
 

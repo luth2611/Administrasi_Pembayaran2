@@ -134,6 +134,7 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         
         <!-- Optionally, you can add icons to the links -->
+        <?php if($this->session->userdata('hak_akses') == 'admin'): ?>
         <li class="treeview">
           <a href="<?php echo base_url() ?>assets/AdminLTE/#"><i class="fa fa-database"></i> <span>Data Master</span>
             <span class="pull-right-container">
@@ -162,6 +163,7 @@ desired effect
             </span>
           </a>
         </li>
+          <?php endif; ?>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
