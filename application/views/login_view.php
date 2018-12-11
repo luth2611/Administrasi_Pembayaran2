@@ -25,7 +25,7 @@
       <div class="login-box-body">
         <p class="login-box-msg">Selamat Datang</p>
         <?php echo validation_errors(); ?>
-        <?php echo form_open('verifylogin'); ?>
+        <?php echo form_open('verifylogin/cekLogin'); ?>
         <div class="form-group has-feedback">
           <input type="text" name="username" id="username" class="form-control" placeholder="Username">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -35,10 +35,12 @@
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="row">
-          <div class="col-xs-8">
+          <div class="col-xs-6">
+          <!-- <a href='<?= site_url('Login/login_wali_murid') ?>' class="btn btn-secondary btn-block btn-flat" >Akses Wali Murid</a> -->
+         
           </div>
           <!-- /.col -->
-          <div class="col-xs-4">
+          <div class="col-xs-6 pull-right">
             <button type="submit" class="btn btn-primary btn-block btn-flat" value="login">Log In</button>
           </div>
           <!-- /.col -->

@@ -240,102 +240,12 @@
         <td align="center">Rp. <?= $datas['jumlah'] - $datas['sudah_bayar']?></td>
         <td align="center"><?= ($datas['jumlah'] - $datas['sudah_bayar']) == 0?  'Lunas': '<b>Belum Lunas</b>';?></td>
     </tr>
-      </tr>
+     
       <?php $i++;endforeach; ?>
     </tbody>
   </table>
 <?php endforeach; ?>
 
-
-<!-- <p style="font-size: 12px;"> Kegiatan Pengembangan Diri </p>
-<table  style="width:100%; padding-top: -15px; font-size: 12px;" class="table-ket">
-<head>
-  <tr>
-    <td colspan="3" align="center"> Jenis Pengembangan Diri </td>
-    <td align="center"> Nilai </td>
-    <td colspan="2" align="center"> Keterangan</td>
-  </tr>
-</head>
-<tr>
-  <td colspan="3">&nbsp;</td>
-  <td align="center"><b></b></td>
-  <td colspan="2">&nbsp;</td>
-</tr>
-<tr>
-  <td colspan="3">&nbsp;</td>
-  <td align="center"><b></b></td>
-  <td colspan="2">&nbsp;</td>
-</tr>
-<tr>
-  <td colspan="3">&nbsp;</td>
-  <td align="center"><b></b></td>
-  <td colspan="2">&nbsp;</td>
-</tr>
-</table> <br>
-<table>
-  <tr>
-    <td style="width: 100%">
-<table  style="width:100%; font-size: 12px;" class="table-kiri">
-<head>
-  <tr>
-    <th colspan="4" align="center"> Akhlak dan Keperibadian </th>
-  </tr>
-</head>
-<tr>
-  <td width="3px">1.</td>
-  <td width="50px">Akhlak</td>
-  <td width="3">:</td>
-  <td></td>
-</tr>
-<tr>
-  <td width="3px">2.</td>
-  <td width="50px">Kepribadian</td>
-  <td width="3">:</td>
-  <td></td>
-</tr><br>
-<tr>
-  <td></td>
-  <td width="50px"></td>
-  <td></td>
-  <td></td>
-</tr>
-</table><br>
-    </td>
-
-    <td style="width: 10%;"></td>
-
-    <td style="width: 100%;">
-      <table  style="width:100%; font-size: 12px;" class="table-kanan">
-<head>
-  <tr>
-    <th colspan="5" align="center"> Ketidak Hadiran </th>
-  </tr>
-</head>
-<tr>
-  <td width="3px">1.</td>
-  <td width="120px">Sakit</td>
-  <td width="3">:</td>
-  <td></td>
-  <td>Hari</td>
-</tr>
-<tr>
-  <td width="3px">2.</td>
-  <td width="120px">Izin</td>
-  <td width="3">:</td>
-  <td></td>
-  <td>Hari</td>
-</tr>
-<tr>
-  <td width="3px">3.</td>
-  <td width="120px">Tanpa Keterangan</td>
-  <td width="3">:</td>
-  <td></td>
-  <td>Hari</td>
-</tr>
-</table>
-    </td>
-  </tr>
-</table> -->
 <br>
 <div class="hormat">
   <p><u>Bandung, <?php echo date('d-M-Y'); ?></u><br/>

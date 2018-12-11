@@ -17,8 +17,14 @@ Class User extends CI_Model{
       return false;
     }
   }
-
-
+  public function getData($data,$table,$where = null){
+    $this->db->select($data);
+    $this->db->from($table);
+    if($where != null){
+      $this->db->where($where);
+    }
+    return $this->db->get();
+  }
 
 }
 
