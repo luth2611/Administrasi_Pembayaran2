@@ -25,5 +25,3 @@ class Transaksi extends CI_Controller {
 
 	
 	}
-
-}
